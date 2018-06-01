@@ -1,0 +1,65 @@
+{block slider}
+{var $slides = rad\app\model\slide::getslides()}
+
+                                {if count($slides) > 0}
+			<!-- SLIDER -->   
+            <div class="revwrap">
+            
+				<!-- START REVOLUTION -->
+				<div id="rev_slider_2_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;padding:0px;margin-top:0px;margin-bottom:0px;max-height:500px;">
+					<div id="rev_slider_2_1" class="rev_slider fullwidthabanner" style="display:none;max-height:500px;height:500px;">
+						<ul>	
+                                    {foreach $slides as $slide}
+
+
+						<!-- SLIDE  -->
+							<li data-transition="random" data-slotamount="7" data-masterspeed="500"  data-saveperformance="off" >
+								<!-- MAIN IMAGE -->
+								<img src='{\mem::get('config')->config['tpl']['baseurl']|noescape}{$slide['slide_image']}'data-bgposition="center center" data-kenburns="on" {if strlen(strstr($_SERVER['HTTP_USER_AGENT'], 'Firefox')) == 0}data-duration="6000"{/if} data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="105" data-bgpositionend="center center">
+								<!-- LAYERS -->
+                {if $_SESSION['lang'] == "english"}
+                
+                {var $slide['slide_title'] = $slide['slide_englishtitle']}
+                
+                {/if}
+                {if trim($slide['slide_title']) != ""}
+								<!-- LAYER NR. 1 -->
+								<div class="tp-caption excerpt5 lfr tp-resizeme"
+									data-x="{if $_SESSION['lang'] == "arabic"}688{else}50{/if}"
+									data-y="180" 
+									data-speed="1000"
+									data-start="700"
+									data-easing="Power3.easeInOut"
+									data-splitin="none"
+									data-splitout="none"
+									data-elementdelay="0.1"
+									data-endelementdelay="0.1"
+									data-endspeed="300"
+									style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;">{$slide['slide_title']}
+								</div>
+								{/if}
+							</li>
+							
+							{/foreach}
+							
+							
+							
+							
+						</ul>
+						<div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>	
+					</div>
+				</div>
+				
+				<style type="text/css">
+					#rev_slider_2_1_wrapper .tp-loader.spinner3 div {  background-color: #FFFFFF !important; }
+				</style>
+				<!-- END REVOLUTION SLIDER --> 	
+
+            </div>
+            <!-- End SLIDER --> 
+							{/if}
+                                 
+{/block}			
+
+						
+			

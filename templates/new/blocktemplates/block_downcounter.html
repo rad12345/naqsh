@@ -1,0 +1,83 @@
+
+	{var $counter = \rad\app\model\counter::getcounter()}	
+{var $time = strtotime($counter['counter_day'] . " " . $counter['counter_month'] . " " . $counter['counter_year'] . " " . $counter['counter_hour'] . ":00:00")}
+{if $time - time() > 0}
+
+	
+	
+				
+<div class="gap clearfix custom-h50" ></div>
+
+
+					<div class="col-sm-12">
+						
+						<div class=" parallax " style="background-color:#191A1D;background-image: url({\mem::get('config')->config['tpl']['baseurl']}{$counter['counter_image']}) " data-stellar-background-ratio="-0.3" >
+							
+							<div class="row clearfix">
+								
+								<div class="gap clearfix custom-h80"> </div>
+							
+
+
+						
+
+								
+						<div style="background-color:rgba(0,0,0,0.7);">
+							<div class="gap clearfix custom-h20" ></div>
+								<h1 class="tac"><span class="" style="color:#fff;text-shadow: 2px 2px #000;">{if $_SESSION['lang'] == "arabic"}{$counter['counter_arabictitle']}{else}{$counter['counter_englishtitle']}{/if} </span></h1>
+								
+								<h3 class="tac"><span class="custom-color1" style="color:#bfbfbf;text-shadow: 2px 2px #000;">
+								
+ 
+{if $_SESSION['lang'] == "arabic"}{$counter['counter_arabicdesc']}{else}{$counter['counter_englishdesc']}{/if} 
+</span>
+
+</h3>
+								
+<ul id="cd_tt1" class="countdown cd_medium clearfix">
+							
+                            <li>
+								<span class="days">00</span>
+								<p class="timeRefDays">{$lang['days']}</p>
+							</li>
+							
+                            <li>
+								<span class="hours">00</span>
+								<p class="timeRefHours">{$lang['hours']}</p>
+							</li>
+							
+                            <li>
+								<span class="minutes">00</span>
+								<p class="timeRefMinutes">{$lang['min']}</p>
+							</li>
+							
+                            <li>
+								<span class="seconds">00</span>
+								<p class="timeRefSeconds">{$lang['sec']}</p>
+							</li>
+						
+                        </ul> <!-- end timer -->
+          								<div class="gap clearfix custom-h20" ></div>
+								
+          </div>
+
+								
+							
+								<div class="gap clearfix custom-h60" ></div>
+							
+							</div>
+							
+						</div>
+						
+					
+					</div> 
+				
+				
+	{/if}
+			
+
+
+
+
+
+						

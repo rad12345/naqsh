@@ -1,0 +1,130 @@
+{layout 'main.html'}
+{block widgetsmenu}class="active"{/block}
+
+{block footinclude}
+
+	<script src="admin/ckeditor/ckeditor.js"></script>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'edit1' );
+                CKEDITOR.replace( 'edit2' );
+            </script>
+
+{/block}
+
+
+
+{block content}
+{var $contentrows = rad\app\model\widgets::admin_getcontentrows()}
+{var $contentswidgets = rad\app\model\widgets::admin_getwidgets()}
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/widgets.html">واجهة الموقع</a> 
+                           
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                </div>          
+                {/if} 
+
+
+
+                <div class="row">
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>اضافة عمود جديد</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST">
+                        <input type="hidden" name="action" value="save">
+                            <div class="form-group">
+                                <label>عنوان العمود</label>
+                                <input name="widgettitle" value="{if isset($_POST['widgettitle'])}{$_POST['widgettitle']}{/if}" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>نوع العمود</label>
+                                <select name="blockfile" class="form-control">
+                                <option value="withbackground">نص مع خلفية</option>
+                                <option value="withoutbackground">نص مع خلفية شفافة</option>
+                                <option value="lastimages">اخر الصور</option>
+                                <option value="lastvideo">المكتبة المنوعه</option>
+                                <option value="downcounter">العداد التنازلي </option>
+                                <option value="lastnews">اخر الاخبار</option>
+                                <option value="aboutus">عن الفرقة</option>
+                                <option value="dabkaprogram">برنامج مدرسة الدبكة</option>
+                                <option value="lastnewsmarq">شريط اخر الاخبار</option>
+                                </select>
+                            </div>
+                            
+
+                            <div class="form-group" style="display:none;">
+                                <label>لون العمود</label>
+                                
+                                    <label style="color:#BAD72F;">
+                                        <input type="radio" name="widgetcolor" id="optionsRadios1" value="#e1a326" checked> لون 
+                                    </label>
+                                
+                               
+                                    <label style="color:#a31845;">
+                                        <input type="radio" name="widgetcolor" id="optionsRadios2" value="#a31845"> لون 
+                                    </label>
+
+                                    <label style="color:#e1a326;">
+                                        <input type="radio" name="widgetcolor" id="optionsRadios3" value="#e1a326"> لون 
+                                    </label>
+                                    <label style="color:#EB8E5E;">
+                                        <input type="radio" name="widgetcolor" id="optionsRadios3" value="#EB8E5E "> لون 
+                                    </label>
+                                    <label style="color:#E5A814;">
+                                        <input type="radio" name="widgetcolor" id="optionsRadios3" value="#E5A814"> لون 
+                                    </label>
+                                    
+                                    
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>الوصف القصير</label>
+                                <textarea id="edit1" name="widgetshortcontent" class="form-control" rows="3">{if isset($_POST['widgetshortcontent'])}{$_POST['widgetshortcontent']}{/if}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>محتوى الصفحة</label>
+                                <textarea id="edit2" name="widgetcontents" class="form-control" rows="10">{if isset($_POST['widgetcontents'])}{$_POST['widgetcontents']}{/if}</textarea>
+                            </div>
+
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

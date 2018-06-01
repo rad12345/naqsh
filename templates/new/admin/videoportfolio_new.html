@@ -1,0 +1,68 @@
+{layout 'main.html'}
+{block videoportfoliomenu}class="active"{/block}
+
+
+
+{block content}
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/videoportfolio.html">المكتبة الفنية</a> 
+                           
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                </div>          
+                {/if} 
+
+
+
+                <div class="row">
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> اضافة صورة جديده</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="save">
+                            <div class="form-group">
+                                <label> عنوان الفيديو</label>
+                                <input name="title" value="{if isset($_POST['title'])}{$_POST['title']}{/if}" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label> رابط الفيديو</label>
+                                <input name="url" value="{if isset($_POST['url'])}{$_POST['url']}{/if}" class="form-control">
+                            </div>
+
+
+                            <button type="submit" class="btn btn-default">اضافة</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

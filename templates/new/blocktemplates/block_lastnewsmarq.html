@@ -1,0 +1,24 @@
+{var $lastnews = \rad\app\model\news::getlastnews(4)}	
+{if count($lastnews) > 0}
+
+
+	<div class="row">
+
+  <br> 
+    <div class="breakingNews bn-darkred" id="bn7">
+    	<div class="bn-title"><h2>{$lang['lastnews']}</h2><span></span></div>
+        <ul>
+        {foreach $lastnews as $lastonenews}	
+
+        	<li><a href="news.html/read/{$lastonenews['news_id']}" >{$lastonenews['news_title']}</a></li>
+        {/foreach}
+        </ul>
+        <div class="bn-navi">
+        	<span></span>
+            <span></span>
+        </div>
+    </div>
+    
+ </div>
+ 
+ {/if}

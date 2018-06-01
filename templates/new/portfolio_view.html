@@ -1,0 +1,74 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['photoportfolio']} - {if $_SESSION['lang'] == "english"}{$album['album_englishtitle']}{else}{$album['album_arabictitle']}{/if}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title"><a href="albums.html">{$lang['photoportfolio']}</a> - <a href="portfolio.html/{$album['album_id']}">{if $_SESSION['lang'] == "english"}{$album['album_englishtitle']}{else}{$album['album_arabictitle']}{/if}</a></h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+{block headinclude}
+<meta name='og:url' content='{\mem::get('config')->config['tpl']['baseurl']}portfolio.html/image/{$image['image_id']}'>
+<meta name='og:image' content='{\mem::get('config')->config['tpl']['baseurl']}{$image['image_image']}'>	
+<meta property="og:title" content="{$sitesettings['setting_title']} {$album['album_arabictitle']}" data-extra="extra"/>	
+<meta property="og:description" content="{$album['album_arabictitle']}" data-extra="extra"/>	
+<meta property="og:image" content='{\mem::get('config')->config['tpl']['baseurl']}{$image['image_image']}' data-extra="extra"/>	<meta property="og:image:width" content="860" /> 
+<meta property="og:image:height" content="484" /><meta property="og:image:type" content="image/jpeg" /> 
+{/block}
+
+
+{block content}
+
+<div class="gap clearfix custom-h50" ></div>
+
+
+                <div class="row clearfix">
+					
+                    <div class="col-sm-8 posts">
+						
+              <div class="post type-post status-publish format-standard has-post-thumbnail hentry clearfix" >
+
+								<img src='{\mem::get('config')->config['tpl']['baseurl']}{$image['image_image']}' />
+             </div><!-- post -->
+						
+
+
+            {include block_comments.html}
+
+
+
+                    </div><!-- grid 8 posts -->
+
+                    <!-- start sidebar -->
+					<div class="col-sm-4  ">
+						
+							<h3 class="col-title">{$lang['otherpictuers']}</h3>
+							
+							
+							<div class="row">
+							{var $counter = 0}
+							{foreach $sidebarimages as $simage}
+							{var $counter = $counter + 1}
+							<div class="col-xs-6">
+								<a href="portfolio.html/image/{$simage['image_id']}"><img src='{\mem::get('config')->config['tpl']['baseurl']}{$simage['image_thumb']}' /></a>
+							</div>
+							{if $counter == 2}
+							{var $counter = 0}
+							</div><div class="row">
+							{/if}
+							{/foreach}
+							
+							</div>
+  
+						
+                        </div>	                    
+					
+                    </div><!-- grid 4 Sidebar -->
+				
+
+					
+
+
+			
+			{/block}

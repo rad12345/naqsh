@@ -1,0 +1,15 @@
+{var $lastvideo = \rad\app\model\videos::getlastvideo()}	
+						<div class="gap clearfix custom-h50" ></div>
+						
+
+						<h2 class="custom-h2" style="font-size: 24pt; font-family: 'courier new', courier, monospace;"><a href="videoportfolio.html"><strong>{$lang['videoportfolio']}</strong></a></h2>
+
+						
+						<div class="gap clearfix custom-h30" ></div>
+						
+						{\rad\app\model\videos::getemped($lastvideo['video_url'],"100%",440)|noescape}
+						
+                                 
+
+						
+			

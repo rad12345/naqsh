@@ -1,0 +1,105 @@
+{layout 'main.html'}
+{block membership}class="active"{/block}
+
+
+
+{block content}
+
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/membership.html">طلبات العضوية</a> - {$membership['membership_firstname']} {$membership['membership_fathername']} {$membership['membership_middlename']} {$membership['membership_familyname']}
+                           
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+
+
+
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>قراءة الطلب </h3> 
+                            </div>
+                            <div class="panel-body">
+                            <div class="row">
+                              <table class="table table-bordered table-hover">
+                            
+                            <tbody>
+                            <tr>
+                            <td>الاسم الاول : {$membership['membership_firstname']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم الاب : {$membership['membership_fathername']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم الجد : {$membership['membership_middlename']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم العائلة : {$membership['membership_familyname']}</td>
+                            </tr>
+                            <tr>
+                            <td>العمر : {$membership['membership_age']}</td>
+                            </tr>
+                            <tr>
+                            <td>الجنس : {if $membership['membership_gender'] == 0}ذكر{else}انثى{/if}</td>
+                            </tr>
+                            <tr>
+                            <td>مكان السكن : {$membership['membership_address']}</td>
+                            </tr>
+                            <tr>
+                            <td>عنوان العمل او الدراسة : {$membership['membership_workaddress']}</td>
+                            </tr>
+                            <tr>
+                            <td>تاريخ الميلاد : {$membership['membership_birthday']}</td>
+                            </tr>
+                            <tr>
+                            <td>هل تعلم الدبكة ؟ : {if $membership['membership_learneddabka'] == 0}نعم{else}لا{/if}</td>
+                            </tr>
+                            <tr>
+                            <td>اين تعلم الدبكة : {$membership['membership_whereldabka']}</td>
+                            </tr>
+                            <tr>
+                            <td>رقم الهاتف : {$membership['membership_phone']}</td>
+                            </tr>
+                            <tr>
+                            <td>رقم الحوال المحمول : {$membership['membership_mobile']}</td>
+                            </tr>
+                            <tr>
+                            <td><a href="admin/membership.html/delete/{$membership['membership_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا الطلب?')" class="btn btn-xs btn-danger">حذف</a></td>                          
+                            </tr>
+                            
+                            </tbody>
+                           
+                            </table>
+                            
+
+                            
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+
+
+                   
+
+
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

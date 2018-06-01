@@ -1,0 +1,80 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['videoportfolio']} - {$video['video_title']}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title"><a href="videoportfolio.html">{$lang['videoportfolio']}</a> - {$video['video_title']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+	
+{block headinclude}
+<meta name='og:url' content='{\mem::get('config')->config['tpl']['baseurl']}videoportfolio.html/video/{$video['video_id']}'>
+<meta name='og:image' content='{$video['video_image']|noescape}'>
+	<meta property="og:title" content="{$sitesettings['setting_title']} - {$video['video_title']}" data-extra="extra"/>
+	<meta property="og:description" content="{$video['video_title']}" data-extra="extra"/>
+	<meta property="og:image" content='{$video['video_image']|noescape}' data-extra="extra"/>
+	<meta property="og:image:width" content="860" /> 
+<meta property="og:image:height" content="484" />
+<meta property="og:image:type" content="image/jpeg" /> 
+
+
+{/block}
+
+
+{block content}
+
+<div class="gap clearfix custom-h50" ></div>
+
+
+                <div class="row clearfix">
+					
+                    <div class="col-sm-8 posts">
+						
+              <div class="post type-post status-publish format-standard has-post-thumbnail hentry clearfix" >
+
+								 {\rad\app\model\videos::getemped($video['video_url'])|noescape}
+             </div><!-- post -->
+						
+
+
+            {include block_comments.html}
+
+
+
+                    </div><!-- grid 8 posts -->
+
+                    <!-- start sidebar -->
+					<div class="col-sm-4  ">
+						
+							<h3 class="col-title">{$lang['othervideos']} </h4>
+							
+							
+							{if is_array($sidebarvideos)}
+							<div class="row">
+							{foreach $sidebarvideos as $svideo}
+							<div class="col-xs-12">
+							<a href="videoportfolio.html/video/{$svideo['video_id']}">
+							<h3 class="col-title">{$svideo['video_title']}</h3>
+								<img src='{$svideo['video_image']|noescape}' /></a>
+							</div>
+							{/foreach}
+							
+							</div>
+							{/if}
+  
+						
+                        </div>	                    
+					
+                    </div><!-- grid 4 Sidebar -->
+				
+			
+
+
+
+					
+
+
+			
+			{/block}

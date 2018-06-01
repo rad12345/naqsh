@@ -1,0 +1,187 @@
+{block content}
+{var $arabicsettings = rad\app\model\settings::getsettings("arabic")}
+{var $englishsettings = rad\app\model\settings::getsettings("english")}
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/settings.html">اعدادت الموقع </a> 
+                        </h1>
+                    </div>
+                </div>
+               {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}    
+
+
+                <div class="row">
+                
+         
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>اعدادات الموقع
+                                - الواجهة العربية</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST">
+                             <input type="hidden" name="action" value="arabic">
+                            <div class="form-group">
+                                <label>عنوان الموقع</label>
+                                <input name="title" value="{$arabicsettings['setting_title']}" class="form-control">
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label>وصف قصير عن المركز يظهر في اسفل الصفحة</label>
+                                <textarea id="edit" name="desc" class="form-control" rows="5">{$arabicsettings['setting_desc']}</textarea>
+                            </div>                            
+                            <div class="form-group">
+                                <label>رقم الهاتف </label>
+                                <input name="phone" value="{$arabicsettings['setting_phone']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الهاتف المحمول</label>
+                                <input name="mobile" value="{$arabicsettings['setting_mobile']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الفاكس </label>
+                                <input name="fax" value="{$arabicsettings['setting_fax']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>الايميل  </label>
+                                <input name="email" value="{$arabicsettings['setting_email']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>عنوان المركز - مقل : حنين - السينما</label>
+                                <input name="address" value="{$arabicsettings['setting_address']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>الفيديو في اسفل الصفحة رابط youtube - soundcloud</label>
+                                <input name="video" value="{$arabicsettings['setting_video']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة الفيس بوك</label>
+                                <input name="facebook" value="{$arabicsettings['setting_facebook']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة الانستجرام</label>
+                                <input name="twitter" value="{$arabicsettings['setting_twitter']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة اليوتيوب</label>
+                                <input name="youtube" value="{$arabicsettings['setting_youtube']}" class="form-control">
+                            </div>
+
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+
+                <div class="row">
+                
+         
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>اعدادات الموقع
+                                - الواجهة English</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST">
+                             <input type="hidden" name="action" value="english">
+                            <div class="form-group">
+                                <label>عنوان الموقع</label>
+                                <input name="title" value="{$englishsettings['setting_title']}" class="form-control">
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label>وصف قصير عن المركز يظهر في اسفل الصفحة</label>
+                                <textarea id="edit" name="desc" class="form-control" rows="5">{$englishsettings['setting_desc']}</textarea>
+                            </div>                            
+                            <div class="form-group">
+                                <label>رقم الهاتف </label>
+                                <input name="phone" value="{$englishsettings['setting_phone']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الهاتف المحمول</label>
+                                <input name="mobile" value="{$englishsettings['setting_mobile']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الفاكس </label>
+                                <input name="fax" value="{$englishsettings['setting_fax']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>الايميل  </label>
+                                <input name="email" value="{$englishsettings['setting_email']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>عنوان المركز - مقل : حنين - السينما</label>
+                                <input name="address" value="{$englishsettings['setting_address']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>الفيديو في اسفل الصفحة رابط youtube - soundcloud</label>
+                                <input name="video" value="{$englishsettings['setting_video']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة الفيس بوك</label>
+                                <input name="facebook" value="{$englishsettings['setting_facebook']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة الانستجرام</label>
+                                <input name="twitter" value="{$englishsettings['setting_twitter']}" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>رابط صفحة اليوتيوب</label>
+                                <input name="youtube" value="{$englishsettings['setting_youtube']}" class="form-control">
+                            </div>
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

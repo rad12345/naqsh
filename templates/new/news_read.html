@@ -1,0 +1,144 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['news']} - {$onenews['news_title']}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title"><a href="news.html">{$lang['news']}</a> - <a href="news.html/cat/{$cat['cat_id']}">{$cat['cat_title']}</a> - {$onenews['news_title']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+
+{block headinclude}
+<meta name='og:url' content='{\mem::get('config')->config['tpl']['baseurl']}news.html/read/{$onenews['news_id']}'>
+<meta name='og:image' content='{\mem::get('config')->config['tpl']['baseurl']}{$onenews['news_image']}'>
+	<meta property="og:title" content="{$sitesettings['setting_title']} - {$onenews['news_title']}" data-extra="extra"/>
+	<meta property="og:description" content="{$onenews['news_shortcontent']}" data-extra="extra"/>
+	<meta property="og:image" content='{\mem::get('config')->config['tpl']['baseurl']}{$onenews['news_image']}' data-extra="extra"/>
+<meta property="og:image:type" content="image/jpeg" /> 
+
+
+{/block}
+
+
+
+
+{block content}
+{var $newscats = rad\app\model\news::admin_lang_cats()}
+<div class="gap clearfix custom-h50" ></div>
+
+      <div class="row">
+
+<div class="col-sm-8">
+
+
+
+      <div class="row">
+        <div class="action mbf style3 dark_action clearfix">
+                                    <div class="inner" style="padding:30px 10px 10px 10px;">
+                                        <div class="matn">
+
+
+                    <h3 class="col-title">{$onenews['news_title']}</h3>
+                    <span class="liner" style="margin: -1px 0 0px; "></span>
+
+
+                    </div>
+                    </div> 
+
+
+
+                    <img style="max-height:400px; width:100%;" src='{\mem::get('config')->config['tpl']['baseurl']}{$onenews['news_image']}'>
+                                    <div class="inner">
+                                        <div class="matn">
+
+
+                    <div>
+                    <div class="tt_text_column tt_content_element ">
+                    
+                    {$onenews['news_content']|noescape}
+                    
+                      
+                    <div >
+                    </div>
+
+                    </div>
+                    </div> 
+                  
+                                        </div>
+                                    </div>
+        </div>
+      </div>  
+
+
+
+
+
+
+            {include block_comments.html}
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="col-sm-4">
+<div class="action mbf style3 dark_action clearfix">
+                            <div class="inner">
+                                <div class="matn">
+
+
+						<div>
+						<h3 class="col-title">{$lang['cats']}</h3>
+						<span class="liner"></span>
+						
+            <div class="tt_text_column tt_content_element ">
+            
+
+<div class="tt_progress_bar tt_content_element">
+
+						{if isset($newscats[$_SESSION['lang']])}
+						{foreach $newscats[$_SESSION['lang']] as $cat}
+<a href="news.html/cat/{$cat['cat_id']}" title="">
+							
+                            <div class="tt_single_bar" style="margin-bottom: 2px;">
+                            <small class="tt_label">{$cat['cat_title']}</small>
+                       </div>
+</a>   					
+						{/foreach}	
+						{/if}	
+</div>	
+	
+	
+					
+                        </div>
+
+            </div>
+						</div> 
+					
+                                </div>
+                            </div>
+                        </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+					
+
+
+			
+			{/block}

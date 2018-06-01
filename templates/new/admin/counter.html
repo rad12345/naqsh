@@ -1,0 +1,132 @@
+{layout 'main.html'}
+{block settingsmenu}class="active"{/block}
+
+
+
+{block content}
+{var $counter = \rad\app\model\counter::getcounter()}
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/counter.html">الحفلة القادمة</a> 
+                           
+                        </h1>
+                    </div>
+                </div>
+                <div class="row">
+
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                </div>          
+                {/if} 
+
+
+
+                <div class="row">
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> اضافة صورة جديده</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="save">
+                            <div class="form-group">
+                                <label> عنوان الحفلة - عربي</label>
+                                <input name="arabictitle" value="{$counter['counter_arabictitle']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label> وصف الحفلة - عربي</label>
+                                <input name="arabicdesc" value="{$counter['counter_arabicdesc']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label> عنوان الحفلة - English</label>
+                                <input name="englishtitle" value="{$counter['counter_englishtitle']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>وصف الحفلة - English</label>
+                                <input name="englishdesc" value="{$counter['counter_englishdesc']}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label> الساعه </label>
+                             <select name="hour" class="form-control">
+{for $i = 1; $i <= 24; $i++}
+  <option value="{$i}" {if $counter['counter_hour'] == $i}selected{/if}>{$i}</option>
+
+{/for}                                   
+                                </select>   
+                            </div>
+                            <div class="form-group">
+                                <label>اليوم</label>
+                             <select name="day" class="form-control">
+{for $i = 1; $i <= 31; $i++}
+  <option value="{$i}" {if $counter['counter_day'] == $i}selected{/if}>{$i}</option>
+
+{/for}                                   
+                                </select>   
+                            </div>
+                            <div class="form-group">
+                                <label>الشهر</label>
+                             <select name="month" class="form-control">
+                                    <option {if $counter['counter_month'] == "January"}SELECTED{/if} value="January">January</option>
+                                    <option {if $counter['counter_month'] == "February"}SELECTED{/if} value="February">February</option>
+                                    <option {if $counter['counter_month'] == "March"}SELECTED{/if} value="March">March</option>
+                                    <option {if $counter['counter_month'] == "April"}SELECTED{/if} value="April">April</option>
+                                    <option {if $counter['counter_month'] == "May"}SELECTED{/if} value="May">May</option>
+                                    <option {if $counter['counter_month'] == "June"}SELECTED{/if} value="June">June</option>
+                                    <option {if $counter['counter_month'] == "July"}SELECTED{/if} value="July">July</option>
+                                    <option {if $counter['counter_month'] == "August"}SELECTED{/if} value="August">August</option>
+                                    <option {if $counter['counter_month'] == "September"}SELECTED{/if} value="September">September</option>
+                                    <option {if $counter['counter_month'] == "October"}SELECTED{/if} value="October">October</option>
+                                    <option {if $counter['counter_month'] == "November"}SELECTED{/if} value="November">November</option>
+                                    <option {if $counter['counter_month'] == "December"}SELECTED{/if} value="December">December</option>
+                                 </select>   
+                           </div>
+                            <div class="form-group">
+                                <label>السنة</label>
+                             <select name="year" class="form-control">
+{for $i = 2016; $i <= 2030; $i++}
+  <option value="{$i}" {if $counter['counter_year'] == $i}selected{/if}>{$i}</option>
+
+{/for}                                   
+                                </select>   
+                                
+
+
+
+                            </div>
+
+                            <div  class="form-group">
+                                <label> اختيار الصورة</label>
+                              <input type="file" name="slideimage">
+                            </div>
+                            <div  class="form-group">
+                                <label>  الصورة</label>
+                              <img src='{\mem::get('config')->config['tpl']['baseurl']}{$counter['counter_image']}' width="100px" height="100px">
+                            </div>
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

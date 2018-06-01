@@ -1,0 +1,152 @@
+{layout 'main.html'}
+{block pagetitle}- {$viewpage['page_name']}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title"> {$viewpage['page_name']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+{block content}
+{var $pageblocks = \rad\app\model\pages::lang_getblocks($viewmainpage['page_id'])}
+<div class="gap clearfix custom-h50" ></div>
+
+							<!-- recent-works-box -->
+					<div class="recent-works">
+					
+				
+                <div class="row">
+					
+                    <div class="col-sm-8">
+                    
+                    
+                  <div class="row">  
+                    
+						<h3 class="col-title">{$viewpage['page_name']}</h3>
+						<span class="liner"></span>
+						<div class="tt_text_column tt_content_element ">
+						{if $viewpage['page_file'] != ""}
+						{var $blockfile = $viewpage['page_file']}
+						{include blocktemplates/pageblock_$blockfile.html,pageblock=>$viewpage}
+						{else}						
+            {$viewpage['page_content']|noescape}	
+            {/if}					
+            </div> 
+                  </div>
+
+<div class="gap clearfix custom-h20"></div>
+                  
+ {foreach $pageblocks as $pageblock}                 
+        {if $viewpage['page_id'] != $pageblock['page_id']}            
+                  <div class="row">  
+                    
+						<h3 class="col-title">{$pageblock['page_name']}</h3>
+						<span class="liner"></span>
+						<div class="tt_text_column tt_content_element ">
+						
+						{if $pageblock['page_file'] != ""}
+						{var $blockfile = $pageblock['page_file']}
+						{include blocktemplates/pageblock_$blockfile.html,pageblock=>$pageblock}
+						{else}						
+            {$pageblock['page_content']|noescape}	
+            {/if}					
+            </div> 
+                  </div>
+               <div class="gap clearfix custom-h20"></div>   
+                  
+         {/if}         
+   {/foreach}               
+
+                  
+                  
+                  
+                  
+
+{if $viewpage['page_imagecat'] != 0}                  
+ {var $counter = 0}
+                 
+{var $images = rad\app\model\images::getimages($viewpage['page_imagecat'],1)}
+                  
+                  <div class="row">  
+                    
+						<h3 class="col-title"><a href="portfolio.html/{$viewpage['page_imagecat']}">{$lang['photosof']} {$viewmainpage['page_name']}</a></h3>
+						<span class="liner"></span>
+						<div class="tt_text_column tt_content_element ">
+
+                            <div class="row">
+                            {foreach $images['images'] as $image}
+                            {if $counter == 4}
+                            {var $counter = 0}
+                            </div><div class="row">
+                            {/if}
+                            {var $counter = $counter + 1}
+                    <div class="col-sm-3  col-xs-6 portfolio4" style="margin-bottom:10px;">
+                                <div class="zoom">
+                                    <a href="portfolio.html/image/{$image['image_id']}"><img width="100%" src='{\mem::get('config')->config['tpl']['baseurl']}{$image['image_thumb']}'></a>
+                                  </div>			
+                    </div>
+                            
+                            
+                            {/foreach}
+                            
+                          
+                            </div>
+
+            </div> 
+                  </div>
+                  
+                  
+{/if}      
+                  
+                  
+
+                  </div> 
+					
+					
+					
+					                    <div class="col-sm-4">
+						<h3 class="col-title">{$lang['pages']}</h3>
+						<span class="liner"></span>
+						
+						
+                        <div class="tt_progress_bar tt_content_element">
+	
+	
+					
+ {if isset($viewsubpages) && count($viewsubpages) > 0}
+			{foreach $viewsubpages as $subpage}
+
+<a href="page/{$viewmainpage['page_id']}/{$subpage['page_id']}.html" title="">
+							
+                            <div class="tt_single_bar" style="margin-bottom: 2px;">
+                            <small class="tt_label">{$subpage['page_name']}</small>
+                       </div>
+</a>   					
+
+
+			{/foreach}
+{else}
+<a href="page/{$viewmainpage['page_id']}.html" title="">
+							
+                            <div class="tt_single_bar" style="margin-bottom: 2px;">
+                            <small class="tt_label">{$viewmainpage['page_name']}</small>
+                       </div>
+</a>   					
+{/if}
+                        </div>
+						
+                    </div> 
+                    </div> 
+
+				
+				
+					
+					
+					
+					
+					
+							
+					</div>	
+			
+			{/block}

@@ -1,0 +1,22 @@
+{layout 'main.html'}
+{includeblock 'block_pages.html'}
+{block pagesmenu}class="active"{/block}
+
+
+{block headinclude}
+
+
+{/block}
+
+{block footinclude}
+
+	<script src="admin/ckeditor/ckeditor.js"></script>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'edit' );
+            </script>
+
+{/block}
+
+

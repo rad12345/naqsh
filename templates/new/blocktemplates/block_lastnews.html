@@ -1,0 +1,67 @@
+{var $lastnews = \rad\app\model\news::getlastnews(4)}	
+{if count($lastnews) > 0}
+
+						<div class="gap clearfix custom-h50" ></div>
+						
+					
+					<h2 class="custom-h2"><a href="news.html">{$lang['lastnews']}</a></h2>
+					
+					<div class="gap clearfix custom-h30" ></div>
+					
+<div class="row">					
+	
+	
+        {var $counter = 0}
+				{foreach $lastnews as $lastonenews}	
+				{var $counter = $counter + 1}
+					<div class="col-sm-6">
+						
+						<div class="services sb3 clearfix">
+							
+							<div class="inline ic">
+							</div>
+							
+							<div class="inline">
+								<img width="150px" style="height:100px;float:{$lang['opj_disalign']};" src='{\mem::get('config')->config['tpl']['baseurl']}{$lastonenews['news_image']}' />
+								
+									<a href="news.html/read/{$lastonenews['news_id']}" >
+									<strong><span style="color: #ffffff; font-size: 12pt;">
+									{$lastonenews['news_title']}
+									</span></strong>
+											
+																		
+									</a>
+									<br>
+
+									<small>{var $lastonenews['news_time'] = date("F j, Y, h:i a",$lastonenews['news_time']);  }{$lastonenews['news_time']}</small>
+								
+								<p><span class="custom-color1">
+								
+								{nl2br(strip_tags($lastonenews['news_shortcontent']))|noescape}
+                
+								</span></p>
+								<a class="tbutton small tbutton6 custom-button2" href="news.html/read/{$lastonenews['news_id']}" >
+								<span>{$lang['readmore']}</span></a>
+							</div>
+						
+						</div>
+						
+						
+						
+
+					</div> 
+					
+				{if $counter == 2}		
+				</div><div class="row">
+				{/if}		
+					
+        {/foreach}
+
+
+
+
+
+</div>
+
+{/if}						
+			

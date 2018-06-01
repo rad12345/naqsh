@@ -1,0 +1,111 @@
+{layout 'main.html'}
+{block dabkarequest}class="active"{/block}
+
+
+
+{block content}
+
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/dabkarequest.html">طلبات المدرسة</a> - {$dabkarequest['dabkarequest_firstname']} {$dabkarequest['dabkarequest_fathername']} {$dabkarequest['dabkarequest_middlename']} {$dabkarequest['dabkarequest_familyname']}
+                           
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+
+
+
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>قراءة الطلب </h3> 
+                            </div>
+                            <div class="panel-body">
+                            <div class="row">
+                              <table class="table table-bordered table-hover">
+                            
+                            <tbody>
+                            <tr>
+                            <td>الاسم الاول : {$dabkarequest['dabkarequest_firstname']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم الاب : {$dabkarequest['dabkarequest_fathername']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم الجد : {$dabkarequest['dabkarequest_middlename']}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم العائلة : {$dabkarequest['dabkarequest_familyname']}</td>
+                            </tr>
+                            <tr>
+                            <td>العمر : {$dabkarequest['dabkarequest_age']}</td>
+                            </tr>
+                            <tr>
+                            <td>الجنس : {if $dabkarequest['dabkarequest_gender'] == 0}ذكر{else}انثى{/if}</td>
+                            </tr>
+                            <tr>
+                            <td>مكان السكن : {$dabkarequest['dabkarequest_address']}</td>
+                            </tr>
+                            <tr>
+                            <td>تاريخ الميلاد : {$dabkarequest['dabkarequest_birthday']}</td>
+                            </tr>
+                            <tr>
+                            <td>هل تعلم الدبكة ؟ : {if $dabkarequest['dabkarequest_learneddabka'] == 0}نعم{else}لا{/if}</td>
+                            </tr>
+                            <tr>
+                            <td>اين تعلم الدبكة وكم فترة التدريب : {$dabkarequest['dabkarequest_whereldabka']}</td>
+                            </tr>
+                            <tr>
+                            <td>هل لديك اخوة ؟ : {if $dabkarequest['dabkarequest_havebrothers'] == 0}نعم{else}لا{/if}</td>
+                            </tr>
+                            <tr>
+                            <td>اسم الاخ : {$dabkarequest['dabkarequest_brothername']}</td>
+                            </tr>
+                            <tr>
+                            <td>رقم الهاتف : {$dabkarequest['dabkarequest_phone']}</td>
+                            </tr>
+                            <tr>
+                            <td>رقم الحوال المحمول (الام) : {$dabkarequest['dabkarequest_mobile']}</td>
+                            </tr>
+                            <tr>
+                            <td>رقم الحوال المحمول (الاب) : {$dabkarequest['dabkarequest_fathermobile']}</td>
+                            </tr>
+                            <tr>
+                            <td><a href="admin/dabkarequest.html/delete/{$dabkarequest['dabkarequest_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا الطلب?')" class="btn btn-xs btn-danger">حذف</a></td>                          
+                            </tr>
+                            
+                            </tbody>
+                           
+                            </table>
+                            
+
+                            
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+
+
+                   
+
+
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

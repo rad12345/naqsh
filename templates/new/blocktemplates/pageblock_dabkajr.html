@@ -1,0 +1,156 @@
+{if isset($_POST['action'])}
+
+{var $formcheck = \rad\app\model\dabkarequest::newdabkarequest()}
+
+
+{if $formcheck === true}
+
+                <div class="alert alert-success">
+                	
+                    <strong>{$lang['requestsent'] }</strong> <br>
+                 
+                </div>
+
+{else}
+
+                <div class="alert alert-danger">
+                	{foreach $formcheck as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+
+{/if}
+
+{/if}
+
+<div class="tt_text_column tt_content_element ">
+						
+{$pageblock['page_content']|noescape}
+            </div>
+
+
+                        <div class="ttcf7" id="ttcf7-f5-p263-o2">
+							
+                            <div class="screen-reader-response" ></div>
+							
+                            <form name="" action="" method="post">
+                            <input type="hidden" name="action" value="rad">								
+								<p><font color="white" size="3px">{$lang['firstname']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="firstname"  value="{if isset($_POST['firstname'])}{$_POST['firstname']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px">{$lang['fathername']}  *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="fathername"  value="{if isset($_POST['fathername'])}{$_POST['fathername']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px">{$lang['middlename']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="middlename"  value="{if isset($_POST['middlename'])}{$_POST['middlename']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px">{$lang['familyname']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="familyname"  value="{if isset($_POST['familyname'])}{$_POST['familyname']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px">{$lang['age']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+                <select name="age">
+
+{for $i = 1; $i <= 30; $i++}
+  <option value="{$i}" {if  isset($_POST['age']) && $_POST['age'] == $i}selected{/if}>{$i}</option>
+
+{/for}                                   
+                </select>
+
+
+								<p><font color="white" size="3px">{$lang['gender']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									
+                <select name="gender">
+                <option {if isset($_POST['gender']) && $_POST['gender'] == 0}SELECTED{/if} value="0">{$lang['male']}</option>
+                <option {if isset($_POST['gender']) && $_POST['gender'] == 1}SELECTED{/if} value="1">{$lang['female']}</option>
+                </select>
+									</span></p>
+
+								<p><font color="white" size="3px">{$lang['youraddress']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="address"  value="{if isset($_POST['address'])}{$_POST['address']}{/if}" required></span></p>
+
+
+								<p><font color="white" size="3px">{$lang['birthday']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="birthday"  value="{if isset($_POST['birthday'])}{$_POST['birthday']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px">{$lang['didyldabka']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+                <select name="learneddabka">
+                <option {if isset($_POST['learneddabka']) && $_POST['learneddabka'] == 0}SELECTED{/if} value="0">{$lang['yes']}</option>
+                <option {if isset($_POST['learneddabka']) && $_POST['learneddabka'] == 1}SELECTED{/if} value="1">{$lang['no']}</option>
+                </select>
+								</span></p>
+
+								<p><font color="white" size="3px">{$lang['hmldaw']}  </font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="whereldabka"  value="{if isset($_POST['whereldabka'])}{$_POST['whereldabka']}{/if}"></span></p>
+
+
+
+
+								<p><font color="white" size="3px">{$lang['havebrothers']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+                <select name="havebrothers">
+                <option {if isset($_POST['havebrothers']) && $_POST['havebrothers'] == 1}SELECTED{/if} value="1">{$lang['no']}</option>
+                <option {if isset($_POST['havebrothers']) && $_POST['havebrothers'] == 0}SELECTED{/if} value="0">{$lang['yes']}</option>
+                </select>
+								</span></p>
+
+								<p><font color="white" size="3px">{$lang['brothername']}  </font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="brothername"  value="{if isset($_POST['brothername'])}{$_POST['brothername']}{/if}"></span></p>
+
+
+
+
+
+
+
+
+
+								<p><font color="white" size="3px">{$lang['homephone']} </font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="phone"  value="{if isset($_POST['phone'])}{$_POST['phone']}{/if}" ></span></p>
+
+								<p><font color="white" size="3px">{$lang['mothermobile']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="mobile"  value="{if isset($_POST['mobile'])}{$_POST['mobile']}{/if}" required></span></p>
+
+
+
+
+								<p><font color="white" size="3px">{$lang['fathermobile']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name">
+									<input  type="text" name="fathermobile"  value="{if isset($_POST['fathermobile'])}{$_POST['fathermobile']}{/if}" required></span></p>
+
+								<p><font color="white" size="3px"> {$lang['entercaptcha']} * </font>
+								<br />
+									<span class="">
+									
+<div class="row">
+<div class="col-xs-2">
+<img src='{\mem::get('config')->config['tpl']['baseurl']}captcha.jpg'>
+</div>
+<div class="col-xs-10">
+<input class="inputer" name="captcha" value="" type="text" placeholder="{$lang['entercaptcha']} *" required />
+</div>
+</div>
+									
+									</span> </p>
+
+
+
+								<p><input type="submit" value="{$lang['send']}" class="ttcf7-form-control ttcf7-submit" /></p>
+								
+							</form>
+						
+                        </div>
+
+<div class="gap clearfix custom-h10"></div>

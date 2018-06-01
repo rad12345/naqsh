@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>naqsh administrator</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="admin/css/bootstrap-rtl.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="admin/css/sb-admin.css" rel="stylesheet">
+    <link href="admin/css/sb-admin-rtl.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="admin/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{block headinclude}
+
+{/block}
+
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="admin/index.html">الادارة</a>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="admin/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li {block homemenu}{/block}>
+                        <a href="admin/index.html"><i class="fa fa-fw fa-dashboard"></i> الرئيسية</a>
+                    </li>
+                    <li {block messages}{/block}>
+                        <a href="admin/messages.html"><i class="fa fa-fw fa-bar-chart-o"></i>الرسائل  {var $messagesnum = \rad\app\model\messages::unreaded()}{if $messagesnum > 0}<span style="padding:5px;border-radius:5px" class="bg-success"><font color="black">{$messagesnum}</font></span>{/if}</a>
+                    </li>
+                    <li {block membership}{/block}>
+                        <a href="admin/membership.html"><i class="fa fa-fw fa-bar-chart-o"></i>طلبات العضوية  {var $memnum = \rad\app\model\membership::unreaded()}{if $memnum > 0}<span style="padding:5px;border-radius:5px" class="bg-success"><font color="black">{$memnum}</font></span>{/if}</a>
+                    </li>
+                    <li {block dabkarequest}{/block}>
+                        <a href="admin/dabkarequest.html"><i class="fa fa-fw fa-bar-chart-o"></i>طلبات  مدرسة الدبكة  {var $dabkanum = \rad\app\model\dabkarequest::unreaded()}{if $dabkanum > 0}<span style="padding:5px;border-radius:5px" class="bg-success"><font color="black">{$dabkanum}</font></span>{/if}</a>
+                    </li>
+                    
+                    <li {block administrators}{/block}>
+                        <a href="admin/administrators.html"><i class="fa fa-fw fa-bar-chart-o"></i>المدراء</a>
+                    </li>
+                    
+                    
+                    
+                    <li {block settingsmenu}{/block} >
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i> اعدادات الموقع <i class="fa fa-fw fa-caret-down"></i></a>
+                        
+                        <ul id="demo1" class="collapse">
+                            <li>
+                        <a href="admin/settings.html"><i class="fa fa-fw fa-bar-chart-o"></i> اعدادات الموقع</a>
+                            </li>
+                            <li>
+                                <a href="admin/background.html">خلفية الموقع</a>
+                            </li>
+                            <li>
+                                <a href="admin/counter.html">الحفلة القادمة </a>
+                            </li>
+                            <li>
+                                <a href="admin/aboutuswidget.html">عن المفرقة</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>                    
+                    <li {block slideshowmenu}{/block}>
+                        <a href="admin/slideshow.html"><i class="fa fa-fw fa-bar-chart-o"></i> شريط الصور المتحرك</a>
+                    </li>
+                    <li {block newsmenu}{/block} >
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> الاخبار <i class="fa fa-fw fa-caret-down"></i></a>
+                        
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="admin/news.html">الاقسام</a>
+                            </li>
+                            <li>
+                                <a href="admin/managenews.html">ادارة الاخبار</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                    
+                                        
+                    <li {block portfoliomenu}{/block}>
+                        <a href="admin/albums.html"><i class="fa fa-fw fa-bar-chart-o"></i>معرض الصور</a>
+                    </li>
+                    <li {block videoportfoliomenu}{/block}>
+                        <a href="admin/videoportfolio.html"><i class="fa fa-fw fa-bar-chart-o"></i>المعرض المنوع</a>
+                    </li>
+                    <li {block widgetsmenu}{/block}>
+                        <a href="admin/widgets.html"><i class="fa fa-fw fa-bar-chart-o"></i>واجهة الموقع</a>
+                    </li>
+                    <li {block pagesmenu}{/block}>
+                        <a href="admin/pages.html"><i class="fa fa-fw fa-bar-chart-o"></i> الصفحات</a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                {block content}{/block}
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="admin/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="admin/js/bootstrap.min.js"></script>
+{block footinclude}
+{/block}
+{block mainjs}{/block}
+    <!-- Morris Charts JavaScript -->
+    <script src="admin/js/plugins/morris/raphael.min.js"></script>
+    <script src="admin/js/plugins/morris/morris.min.js"></script>
+    <script src="admin/js/plugins/morris/morris-data.js"></script>
+
+</body>
+
+</html>

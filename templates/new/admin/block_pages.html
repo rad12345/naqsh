@@ -1,0 +1,262 @@
+{block content}
+{var $pages = rad\app\model\pages::get()}
+{var $subpages = rad\app\model\pages::getsub()}
+
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/pages.html"> ادارة الصفحات </a> 
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+                 {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}           
+                
+ {if !isset($hidepages)}
+ 
+ 
+ <form action="" method="POST">
+  <input type="hidden" name="action" value="saveorder">                  
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>   الصفحات العربية - <input type="submit" value="حفظ الترتيب"></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الصفحة</th>
+                                                <th>الترتيب</th>
+                                                <th>خيارات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+ {if isset($pages)}
+			{foreach $pages as $page}
+                              {if $page['page_lang'] == "arabic"}
+                                    
+
+
+
+                                            <tr>
+                                                <td>{$page['page_name']}</td>
+                                                <td><input style="width:40px" type="number" name="{$page['page_id']}" value="{$page['page_order']}"></td>
+                                                <td><a href="admin/pages.html/edit/{$page['page_id']}"  class="btn btn-xs btn-default">تعديل</a> - <a href="admin/pages.html/delete/{$page['page_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الصفحة?')" class="btn btn-xs btn-danger">حذف</a> </td>
+                                            </tr>
+
+{if isset($subpages[$page['page_id']])}
+									
+			{foreach $subpages[$page['page_id']] as $spage}
+
+                                            <tr style="background:#dff0d8;">
+                                                <td>-> {$spage['page_name']}</td>
+                                                <td><input style="width:40px" type="number" name="{$spage['page_id']}" value="{$spage['page_order']}"></td>
+                                                <td><a href="admin/pages.html/edit/{$spage['page_id']}"  class="btn btn-xs btn-default">تعديل</a> - <a href="admin/pages.html/delete/{$spage['page_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الصفحة?')" class="btn btn-xs btn-danger">حذف</a> </td>
+                                            </tr>
+			{/foreach}
+
+{/if} 
+
+                              {/if}         
+			{/foreach}
+			
+			
+{/if} 
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>   English pages - <input type="submit" value="حفظ الترتيب"></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الصفحة</th>
+                                                <th>الترتيب</th>
+                                                <th>خيارات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        
+ {if isset($pages)}
+			{foreach $pages as $page}
+                              {if $page['page_lang'] == "english"}
+                                    
+
+
+
+                                            <tr>
+                                                <td>{$page['page_name']}</td>
+                                               <td><a href="admin/pages.html/edit/{$page['page_id']}"  class="btn btn-xs btn-default">تعديل</a> - <a href="admin/pages.html/delete/{$page['page_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الصفحة?')" class="btn btn-xs btn-danger">حذف</a> </td>
+                                                 <td><input style="width:40px" type="number" name="{$page['page_id']}" value="{$page['page_order']}"></td>
+                                            </tr>
+
+{if isset($subpages[$page['page_id']])}
+									
+			{foreach $subpages[$page['page_id']] as $spage}
+
+                                            <tr style="background:#dff0d8;">
+                                                <td>-> {$spage['page_name']}</td>
+                                                <td><a href="admin/pages.html/edit/{$spage['page_id']}"  class="btn btn-xs btn-default">تعديل</a> - <a href="admin/pages.html/delete/{$spage['page_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الصفحة?')" class="btn btn-xs btn-danger">حذف</a> </td>
+                                                <td><input style="width:40px" type="number" name="{$spage['page_id']}" value="{$spage['page_order']}"></td>
+ 
+                                           </tr>
+			{/foreach}
+
+{/if} 
+
+                              {/if}         
+			{/foreach}
+			
+			
+{/if} 
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    
+                    
+                    
+                    
+                    
+ </form>                   
+                    
+                    
+{/if}                    
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>{if isset($editpage)} تعديل صفحة {else} اضافة صفحة جديدة {/if}</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST">
+                             <input type="hidden" name="action" value="{if isset($editpage)}editpage{else}newpage{/if}">
+                            <div class="form-group">
+                                <label>عنوان الصفحة</label>
+                                <input name="pagetitle" value="{$pageinfo['page_name']}" class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>وصف الصفحة</label>
+                                <input name="pagedesc" value="{$pageinfo['page_desc']}" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>اللغة</label>
+                                <select name="pagelang" class="form-control">
+                                <option {if $pageinfo['page_lang'] === "arabic"} SELECTED {/if}  value="arabic">العربية</option>
+                                <option {if $pageinfo['page_lang'] === "english"} SELECTED {/if}  value="english">English</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>الصفحة الرئيسية</label>
+                                <select name="mainpage" class="form-control">
+                                <option value=0>لا يوجد</option>
+                                 {if isset($pages)}
+                                  {foreach $pages as $page}
+                                    {if $pageid != $page['page_id']}
+                                    <option {if $pageinfo['page_parent'] === $page['page_id']} SELECTED {/if} value="{$page['page_id']}">{$page['page_name']}</option>
+                                    {/if}
+                                  {/foreach}
+                                  {/if}
+                                </select>
+                            </div>
+                             <div class="form-group">
+                                <label>اسم الصفحة الفريد في الرابط - للصفحات الخاصه بلانجليزي</label>
+                                <input name="pageuname" value="{$pageinfo['page_uname']}" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>عرض رابط الصفحة في القائمة</label>
+                                <select name="pageshowinm" class="form-control">
+                                <option value="0" {if $pageinfo['page_showinm'] == 0}SELECTED{/if}>نعم</option>
+                                <option value="1" {if $pageinfo['page_showinm'] == 1}SELECTED{/if}>لا</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>نوع الصفحة</label>
+                                <select name="pagetype" class="form-control">
+                                <option value="0" {if $pageinfo['page_type'] == 0}SELECTED{/if}>صفحة مستقلة</option>
+                                <option value="1" {if $pageinfo['page_type'] == 1}SELECTED{/if}>تظهر في الصفحة الرئيسية للصفحة المستقلة</option>
+                                </select>
+                            </div>
+{var $albums = rad\app\model\images::getalbums()}
+
+
+                            <div class="form-group">
+                                <label> عرض البوم صور </label>
+                                <select name="pageimagecat" class="form-control">
+                                <option value="0" {if $pageinfo['page_imagecat'] == 0}SELECTED{/if}>لا</option>
+                                {foreach $albums as $album}
+                                <option value="{$album['album_id']}" {if $pageinfo['page_imagecat'] == $album['album_id']}SELECTED{/if}>{$album['album_arabictitle']} - {$album['album_englishtitle']}</option>
+                                {/foreach}
+                                
+                                
+                                </select>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label>محتويات الصفحة</label>
+                                <textarea id="edit" name="pagecontents" class="form-control" rows="20">{$pageinfo['page_content']|noescape}</textarea>
+                            </div>
+
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

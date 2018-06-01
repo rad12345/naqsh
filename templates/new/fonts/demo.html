@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Transfonter demo</title>
+	<link href="stylesheet.css" rel="stylesheet">
+	<style>
+		/*
+		http://meyerweb.com/eric/tools/css/reset/
+		v2.0 | 20110126
+		License: none (public domain)
+		*/
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure,
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		/* common styles */
+		body {
+			background: #f1f1f1;
+			color: #000;
+		}
+		.page {
+			background: #fff;
+			width: 940px;
+			margin: 0 auto;
+			padding: 20px 20px 0 20px;
+			overflow: hidden;
+		}
+		.font-container {
+			overflow-x: auto;
+			overflow-y: hidden;
+			margin-bottom: 40px;
+			line-height: 1.3;
+			white-space: nowrap;
+			padding-bottom: 5px;
+		}
+		h1 {
+			position: relative;
+			background: #444;
+			font-size: 32px;
+			color: #fff;
+			padding: 10px 20px;
+			margin: 0 -20px 10px -20px;
+		}
+		.letters {
+			font-size: 25px;
+			margin-bottom: 20px;
+		}
+		.s10:before {
+			content: '10px';
+		}
+		.s11:before {
+			content: '11px';
+		}
+		.s12:before {
+			content: '12px';
+		}
+		.s14:before {
+			content: '14px';
+		}
+		.s18:before {
+			content: '18px';
+		}
+		.s24:before {
+			content: '24px';
+		}
+		.s30:before {
+			content: '30px';
+		}
+		.s36:before {
+			content: '36px';
+		}
+		.s48:before {
+			content: '48px';
+		}
+		.s60:before {
+			content: '60px';
+		}
+		.s72:before {
+			content: '72px';
+		}
+		.s10:before, .s11:before, .s12:before, .s14:before,
+		.s18:before, .s24:before, .s30:before, .s36:before,
+		.s48:before, .s60:before, .s72:before {
+			font-family: Arial, sans-serif;
+			font-size: 10px;
+			font-weight: normal;
+			font-style: normal;
+			color: #999;
+			padding-right: 6px;
+		}
+		/* fonts demo styles */
+		.demo-0 {
+			font-family: 'GE SS TV';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-1 {
+			font-family: 'GE Wide';
+			font-weight: 800;
+			font-style: normal;
+		}
+		.demo-2 {
+			font-family: 'GE SS Unique';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-3 {
+			font-family: 'GE MB MB';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-4 {
+			font-family: 'GE Elegant';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-5 {
+			font-family: 'GE SS Text';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-6 {
+			font-family: 'GE SS Two';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-7 {
+			font-family: 'GE East';
+			font-weight: 800;
+			font-style: normal;
+		}
+		.demo-8 {
+			font-family: 'GE Tasmeem';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-9 {
+			font-family: 'GE MB Fares';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-10 {
+			font-family: 'GE SS Text';
+			font-weight: 200;
+			font-style: normal;
+		}
+		.demo-11 {
+			font-family: 'GE Modern';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-12 {
+			font-family: 'GE SS Two';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-13 {
+			font-family: 'GE MB Farah';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-14 {
+			font-family: 'GE SS Unique';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-15 {
+			font-family: 'GE Box';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-16 {
+			font-family: 'GE Curves';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-17 {
+			font-family: 'GE Unique';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-18 {
+			font-family: 'GE Contrast';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-19 {
+			font-family: 'GE Narrow';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-20 {
+			font-family: 'GE Cap';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-21 {
+			font-family: 'GE Modern';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-22 {
+			font-family: 'GE SS Text';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-23 {
+			font-family: 'GE MB Farasha';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-24 {
+			font-family: 'GE Jarida';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-25 {
+			font-family: 'GE Elegant';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-26 {
+			font-family: 'GE SS Text';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-27 {
+			font-family: 'GE Modern';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-28 {
+			font-family: 'GE MB Najm';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-29 {
+			font-family: 'GE SS Text';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-30 {
+			font-family: 'GE SS Two';
+			font-weight: bold;
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+<div class="page">
+	<div class="demo-0">
+		<h1>GE SS TV Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-1">
+		<h1>GE Wide ExtraBold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-2">
+		<h1>GE SS Unique Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-3">
+		<h1>GE MB MB Bold Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-4">
+		<h1>GE Elegant Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-5">
+		<h1>GE SS Text Light Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-6">
+		<h1>GE SS Two Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-7">
+		<h1>GE East ExtraBold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-8">
+		<h1>GE Tasmeem Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-9">
+		<h1>GE MB Fares Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-10">
+		<h1>GE SS Text UltraLight</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-11">
+		<h1>GE Modern Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-12">
+		<h1>GE SS Two Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-13">
+		<h1>GE MB Farah Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-14">
+		<h1>GE SS Unique Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-15">
+		<h1>GE Box Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-16">
+		<h1>GE Curves Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-17">
+		<h1>GE Unique Expanded Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-18">
+		<h1>GE Contrast Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-19">
+		<h1>GE Narrow Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-20">
+		<h1>GE Cap Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-21">
+		<h1>GE Modern Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-22">
+		<h1>GE SS Text Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-23">
+		<h1>GE MB Farasha Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-24">
+		<h1>GE Jarida Heavy</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-25">
+		<h1>GE Elegant Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-26">
+		<h1>GE SS Text Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-27">
+		<h1>GE Modern Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-28">
+		<h1>GE MB Najm Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-29">
+		<h1>GE SS Text Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+	<div class="demo-30">
+		<h1>GE SS Two Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />
+				ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ق ك ل م ن ه و ي <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s11" style="font-size: 11px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s12" style="font-size: 12px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s14" style="font-size: 14px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s18" style="font-size: 18px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s24" style="font-size: 24px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s30" style="font-size: 30px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s36" style="font-size: 36px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s48" style="font-size: 48px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s60" style="font-size: 60px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+			<p class="s72" style="font-size: 72px;">مركز نقش للفنون الشعبية برمجة رعد تجربة النصوص.</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

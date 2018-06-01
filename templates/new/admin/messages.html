@@ -1,0 +1,89 @@
+{layout 'main.html'}
+{block messages}class="active"{/block}
+
+
+
+{block content}
+{var $messages = rad\app\model\messages::getmessages($pageid,20)}
+
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/messages.html">الرسائل</a> 
+                           
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+
+
+
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>الرسائل </h3> 
+                            </div>
+                            <div class="panel-body">
+                            <div class="row">
+                              <table class="table table-bordered table-hover">
+                            <thead>
+                            
+                            <th>الكاتب</th>
+                            <th>الموضوع</th>
+                            <th>تاريخ الرسالة</th>
+                            <th>خيارات</th>
+                            </thead>
+                            
+                            <tbody>
+                            {foreach $messages['messages'] as $message}
+                            <tr {if $message['message_read'] == 0} class="danger"{/if}>
+                            <td>{$message['message_name']}</td>
+                            <td><a href="admin/messages.html/read/{$message['message_id']}">{$message['message_subject']}</a></td>
+                            <td>{var $message['message_time'] = date("d/m/Y h:i:s a",$message['message_time'])}   {$message['message_time']}</td>
+                            <td><a href="admin/messages.html/delete/{$message['message_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الرسالة?')" class="btn btn-xs btn-danger">حذف</a></td>                          
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                           
+                            </table>
+                            
+
+                            
+                            
+                            </div>
+                   <div class="row">
+<ul class="pagination">
+{for $i = 1; $i < $messages['pagesnumber']+1; $i++}
+ {if $i == $pageid} 
+ <li  class="disabled"><a href=''>{$i}</a></li>
+ {else}
+ <li ><a href="admin/messages.html/{$i}">{$i}</a></li>
+{/if}
+{/for}
+</ul>
+                   </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+
+
+                   
+
+
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

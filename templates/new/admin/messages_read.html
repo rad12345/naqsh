@@ -1,0 +1,86 @@
+{layout 'main.html'}
+{block messages}class="active"{/block}
+
+
+
+{block content}
+
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/messages.html">الرسائل</a> - {$message['message_subject']}
+                           
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+
+
+
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>قراءة الرسالة </h3> 
+                            </div>
+                            <div class="panel-body">
+                            <div class="row">
+                              <table class="table table-bordered table-hover">
+                            
+                            <tbody>
+                            <tr>
+                            <td>اسم المرسل : {$message['message_name']}</td>
+                            </tr>
+                            <tr>
+                            <td>بريد المرسل : {$message['message_email']}</td>
+                            </tr>
+
+                            <tr>
+                            <td>رقم هاتف المرسل : {$message['message_phone']}</td>
+                            </tr>
+
+                            <tr>
+                            <td>الموضوع : {$message['message_subject']}</a></td>
+                            </tr>
+                            <tr>
+                            <td>تاريخ ارسال الرسالة : {var $message['message_time'] = date("d/m/Y h:i:s a",$message['message_time'])}   {$message['message_time']}</td>
+                            </tr>
+                            <tr>
+                            <td>الرسالة : <br>{var $message['message_message'] = htmlspecialchars($message['message_message'])}{nl2br($message['message_message'])|noescape}</td>                          
+                            </tr>
+                            <tr>
+                            <td><a href="admin/messages.html/delete/{$message['message_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذه الرسالة?')" class="btn btn-xs btn-danger">حذف</a></td>                          
+                            </tr>
+                            
+                            </tbody>
+                           
+                            </table>
+                            
+
+                            
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+
+
+                   
+
+
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

@@ -1,0 +1,82 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['videoportfolio']}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title">{$lang['videoportfolio']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+
+
+{block content}
+{var $videos = rad\app\model\videos::getvideos($pageid,4)}
+
+<div class="gap clearfix custom-h50" ></div>
+
+
+                <div class="row clearfix mbs">
+					
+                            {var $counter = 0}
+                            <div class="row">
+                            {foreach $videos['videos'] as $video}
+                            {if $counter == 2}
+                            {var $counter = 0}
+                            </div><div class="row">
+                            {/if}
+                            {var $counter = $counter + 1}
+                    <div class="col-sm-6  " style="margin-bottom:10px;">
+                                <div class="detailes" style="">
+                                    <a href="videoportfolio.html/video/{$video['video_id']}"><h2>{$video['video_title']}</h2></a>
+                                    {\rad\app\model\videos::getemped($video['video_url'])|noescape}
+                                   
+                                   <div class="detailes">
+									<h5> <a href="videoportfolio.html/video/{$video['video_id']}">{$lang['comments']}</a></h5>                                                    
+                                   
+								</div>
+                                  </div>			
+                    </div>
+                            
+                            
+                            {/foreach}
+                            </div>
+                              
+
+					
+                              </div><!-- row -->
+                <div class="row  ">
+					<!-- PAGINATION -->
+					<div class="pagination-tt clearfix">
+                   
+						<ul>
+						{if $pageid > 1}
+						{var $prev = $pageid - 1} 
+							<li><a href="videoportfolio.html/page/{$prev}"">&lt; {$lang['prev']}</a></li>
+						{else}
+						<li><span>&lt; {$lang['prev']}</span></li>
+						{/if}
+{for $i = 1; $i < $videos['pagesnumber']+1; $i++}
+ {if $i == $pageid} 
+ <li><span>{$i}</span></li>
+ {else}
+ <li ><a href="videoportfolio.html/page/{$i}">{$i}</a></li>
+{/if}
+{/for}
+							
+						{if $pageid < $videos['pagesnumber']}
+						{var $next = $pageid + 1} 
+							<li><a href="videoportfolio.html/page/{$next}"">{$lang['next']} &gt;</a></li>
+						{else}
+						<li><span>{$lang['next']} &gt;</span></li>
+						{/if}							
+						</ul>
+               
+					</div>
+					<!-- END PAGINATION --> 
+				</div><!-- row -->
+					
+
+
+			
+			{/block}

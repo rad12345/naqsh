@@ -1,0 +1,29 @@
+<style>
+.mce-container { 
+}
+</style>
++
+  <script src="admin/tinymce/tinymce.min.js"></script>
+  <script>
+ 
+tinymce.init({
+ language : "ar",
+   selector: 'textarea',
+  height: 200,
+  theme: 'modern',
+forced_root_block : '',
+   fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+  plugins: [
+    ' table advlist autolink lists link image charmap  preview hr anchor pagebreak',
+    'searchreplace wordcount visualblocks visualchars code fullscreen',
+    'insertdatetime nonbreaking save table contextmenu directionality',
+    'template paste textcolor colorpicker textpattern imagetools'
+  ],
+directionality : 'rtl',
+menubar: "",
+  toolbar1: 'insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image',
+  toolbar2: 'table print preview media fontselect |  fontsizeselect forecolor backcolor paste ',
+  table_class_list: [
+    { title: 'table', value: 'table'}
+  ] });
+  </script>

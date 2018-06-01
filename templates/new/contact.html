@@ -1,0 +1,113 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['contactus']}{/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title">{$lang['contactus']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+{block content}
+<div class="gap clearfix custom-h50" ></div>
+
+							<!-- recent-works-box -->
+					<div class="recent-works">
+					
+				
+
+                 {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}           
+		
+							
+                <div class="row clearfix" >
+					
+                    <div class="col-sm-8">
+						
+                        <div class="clearfix title-left">
+                            <h2 class="col-title" ><i class="title-icon icon-edit custom-icon-color25" ></i>{$lang['contactus']}</h2>
+                            <span class="liner"></span>
+                        </div>
+						
+                        <div class="ttcf7" id="ttcf7-f5-p263-o2">
+							
+                            <div class="screen-reader-response" ></div>
+							
+                            <form name="" action="" method="post">
+                            <input type="hidden" name="action" value="rad">								
+								<p><font color="white" size="3px">{$lang['name']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-name"><input  type="text" name="name" id="your-name" size="40" class="ttcf7-form-control ttcf7-text ttcf7-validates-as-required" aria-required="true" aria-invalid="false" value="{if isset($_POST['name'])}{$_POST['name']}{/if}" required></span></p>
+								<p><font color="white" size="3px">{$lang['email']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-email"><input   type="email" name="email" id="your-email" size="40" class="ttcf7-form-control ttcf7-text ttcf7-email" value="{if isset($_POST['email'])}{$_POST['email']}{/if}" required></span></p>
+								<p><font color="white" size="3px">{$lang['phonenumber']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-email"><input   type="text" name="phone" id="your-phone" size="40" class="ttcf7-form-control ttcf7-text ttcf7-email" value="{if isset($_POST['phone'])}{$_POST['phone']}{/if}" required></span></p>
+								<p><font color="white" size="3px">{$lang['subject']} *</font><br />
+									<span class="ttcf7-form-control-wrap your-subject"><input   type="text" name="subject" id="your-subject" size="40" class="ttcf7-form-control ttcf7-text" aria-invalid="false" value="{if isset($_POST['subject'])}{$_POST['subject']}{/if}" required></span></p>
+								<p><font color="white" size="3px"> {$lang['message']} * </font><br />
+									<span class=""><textarea   name="message" id="message" cols="40" rows="10" class="" aria-invalid="false" required>{if isset($_POST['message'])}{$_POST['message']}{/if}</textarea></span> </p>
+
+								<p><font color="white" size="3px"> {$lang['entercaptcha']} * </font>
+								<br />
+									<span class="">
+									
+<div class="row">
+<div class="col-xs-2">
+<img src='{\mem::get('config')->config['tpl']['baseurl']}captcha.jpg'>
+</div>
+<div class="col-xs-10">
+<input class="inputer" name="captcha" value="" type="text" placeholder="{$lang['entercaptcha']} *" required />
+</div>
+</div>
+									
+									</span> </p>
+
+
+
+								<p><input type="submit" value="{$lang['send']}" class="ttcf7-form-control ttcf7-submit" /></p>
+								
+							</form>
+						
+                        </div>
+					
+                    </div> 
+					
+                    <div class="col-sm-4" >
+						
+                        <div class="clearfix title-left">
+                        	<h2 class="col-title" ><i class="title-icon icon-map-marker custom-icon-color25" ></i>{$lang['address']}</h2>
+                            <span class="liner"></span>
+						</div>
+						
+                        <p><strong>{$sitesettings['setting_address']}</strong><br />
+						
+                        <div class="gap clearfix custom-h10"> </div>
+						
+                        <i class="icon-phone icon-xs custom-icon-color26" ></i> <strong>Tel</strong>:{$sitesettings['setting_phone']}
+						
+                        <div class="clearfix" ></div>
+                        <i class="icon-phone icon-xs custom-icon-color26" ></i> <strong>Mobile</strong>:{$sitesettings['setting_mobile']}
+						
+                        <div class="clearfix" ></div>
+						<i class="icon-print icon-xs custom-icon-color26" ></i> <strong>Fax:</strong> {$sitesettings['setting_fax']}
+						
+                        <div class="clearfix" ></div>
+						<i class="icon-envelope-alt icon-xs custom-icon-color26" ></i> <strong>Email:</strong> {$sitesettings['setting_email']}
+						
+					
+					</div> 
+					</div> 
+				</div><div class="gap clearfix custom-h30" ></div>
+			
+			{/block}

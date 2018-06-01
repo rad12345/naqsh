@@ -1,0 +1,179 @@
+{layout 'main.html'}
+{block widgetsmenu}class="active"{/block}
+
+
+
+{block content}
+{var $contentrows = rad\app\model\widgets::admin_getcontentrows()}
+{var $contentswidgets = rad\app\model\widgets::admin_getwidgets()}
+{var $subcontentswidgets = rad\app\model\widgets::lang_subgetcontentwigets()}
+
+
+
+			                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           <a href="admin/widgets.html">واجهة الموقع</a> 
+                           
+                        </h1>
+                    </div>
+                </div>
+
+
+
+<form action="" method="POST">   
+
+                         
+                <div class="row">
+                
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>الواجهة العربية - <b><a style="color:#337ab7;" href="admin/widgets.html/addrow/arabic"  onclick="return confirm('هل انت متاكد من انك تريد اضافة صف جديد?')"> اضافة صف جديد</a></b>
+                                
+                                 - <input type=submit value="حفظ الترتيب">
+                                </h3>
+                                
+                               
+
+                            </div>
+                            <div class="panel-body">
+                            {if isset($contentrows['arabic'])}
+                            {foreach $contentrows['arabic'] as $conrow}
+                            
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th colspan=4>الصف  {if isset($contentswidgets[$conrow['row_id']]) && count($contentswidgets[$conrow['row_id']]) == 4} {else}
+ <a class="btn btn-xs btn-default" href="admin/widgets.html/newwidget/{$conrow['row_id']}">اضافة عمود</a>
+ 
+ {/if}                                    
+ - <a href="admin/widgets.html/deleterow/{$conrow['row_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+- ترتيب الصف : <input type="number"  name="{$conrow['row_id']}" value="{$conrow['row_order']}" >
+ 
+ </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {if isset($contentswidgets[$conrow['row_id']])}
+                                        {foreach $contentswidgets[$conrow['row_id']] as $conwidget}
+                                         <td align="center">
+                                         
+                                         <div style="padding:3px;margin:3px;background-color:#e1a326 ;">
+                                         {$conwidget['widget_title']}
+                                         <br>
+                                         <a href="admin/widgets.html/editwidget/{$conwidget['widget_id']}" class="btn btn-xs btn-default">تعديل</a> - 
+                                         <a href="admin/widgets.html/deletewidget/{$conwidget['widget_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+                                         </div>
+                                         {if isset($subcontentswidgets[$conwidget['widget_id']])}
+                                         {foreach $subcontentswidgets[$conwidget['widget_id']] as $subwidget}
+                                         <div style="padding:3px;margin:3px;background-color:{$subwidget['widget_color']|noescape} ;">
+                                         {$subwidget['widget_title']}
+                                         <br>
+                                         <a href="admin/widgets.html/editwidget/{$subwidget['widget_id']}" class="btn btn-xs btn-default">تعديل</a> - 
+                                         <a href="admin/widgets.html/deletewidget/{$subwidget['widget_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+                                         </div>
+                                         {/foreach}
+                                         {/if}
+                                   <a class="btn btn-xs btn-default" href="admin/widgets.html/newwidget/{$conrow['row_id']}/{$conwidget['widget_id']}">اضافة عمود</a>
+                                         </td>
+                                        {/foreach} 
+
+                                        {/if} 
+                                  </tr>
+                                  
+                                  
+                             </tbody>
+                             </table>                               
+                           {/foreach} 
+                           {/if}
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+
+
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Enhlish Website - <b><a style="color:#337ab7;" href="admin/widgets.html/addrow/english"  onclick="return confirm('هل انت متاكد من انك تريد اضافة صف جديد?')"> اضافة صف جديد</a></b>
+                                
+                                 - <input type=submit value="حفظ الترتيب">
+                                </h3>
+                                
+                                
+                            </div>
+                            <div class="panel-body">
+                            
+                            {if isset($contentrows['english'])}
+                            {foreach $contentrows['english'] as $conrow}
+                            
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th colspan=4>الصف  {if isset($contentswidgets[$conrow['row_id']]) && count($contentswidgets[$conrow['row_id']]) == 4} {else}
+ <a class="btn btn-xs btn-default" href="admin/widgets.html/newwidget/{$conrow['row_id']}">اضافة عمود</a>
+ {/if}                                    
+ - <a href="admin/widgets.html/deleterow/{$conrow['row_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+ - ترتيب الصف : <input type="number" min="0" name="{$conrow['row_id']}" value="{$conrow['row_order']}" >
+
+ 
+ </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {if isset($contentswidgets[$conrow['row_id']])}
+                                        {foreach $contentswidgets[$conrow['row_id']] as $conwidget}
+                                         <td align="center">
+                                         
+                                         <div style="padding:3px;margin:3px;background-color:#e1a326 ;">
+                                         {$conwidget['widget_title']}
+                                         <br>
+                                         <a href="admin/widgets.html/editwidget/{$conwidget['widget_id']}" class="btn btn-xs btn-default">تعديل</a> - 
+                                         <a href="admin/widgets.html/deletewidget/{$conwidget['widget_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+                                         </div>
+                                         {if isset($subcontentswidgets[$conwidget['widget_id']])}
+                                         {foreach $subcontentswidgets[$conwidget['widget_id']] as $subwidget}
+                                         <div style="padding:3px;margin:3px;background-color:{$subwidget['widget_color']|noescape} ;">
+                                         {$subwidget['widget_title']}
+                                         <br>
+                                         <a href="admin/widgets.html/editwidget/{$subwidget['widget_id']}" class="btn btn-xs btn-default">تعديل</a> - 
+                                         <a href="admin/widgets.html/deletewidget/{$subwidget['widget_id']}" onclick="return confirm('هل انت متاكد من انك تريد حذف هذا العمود?')" class="btn btn-xs btn-danger">حذف</a>
+                                         </div>
+                                         {/foreach}
+                                         {/if}
+                                   <a class="btn btn-xs btn-default" href="admin/widgets.html/newwidget/{$conrow['row_id']}/{$conwidget['widget_id']}">اضافة عمود</a>
+                                         </td>
+                                        {/foreach} 
+
+                                        {/if} 
+                                  </tr>
+                                  
+                                  
+                             </tbody>
+                             </table>                               
+                           {/foreach} 
+                           {/if}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+                
+ </form>               
+                
+                
+                
+
+{/block}

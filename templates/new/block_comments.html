@@ -1,0 +1,99 @@
+						<div class="comments">					
+							
+							<div class="user-comments">
+								
+								<div class="clearfix title-left" >
+									<h3 class="col-title" > {$lang['comments']} <span></span></h3>
+								</div>																		 
+								
+								<div class="navigation">
+									<div class="prv"></div>
+									<div class="nxt"></div>
+								</div>	
+								
+								{foreach $comments as $comment}					
+								
+								<ul class="comment-list clearfix">
+									
+									<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1 parent" id="comment-2">
+										
+										<div class="comment-body">
+											
+											<div class="comment-author vcard">
+												{$lang['author']} <span class="says">:</span> {$comment['comment_writer']}		
+											</div>									
+											
+											<div class="comment-meta commentmetadata" style="  left: 0;  {$lang['opj_disalign']}: inherit;">
+											<a href='#' onclick="return false;">
+												{var $comment['comment_time'] = date("m, j, Y, h:i a",$comment['comment_time']);  }{$comment['comment_time']}</a>		
+											</div>
+											
+											{var $comment['comment_comment'] = htmlspecialchars($comment['comment_comment'])}
+										{nl2br($comment['comment_comment'])|noescape}
+										
+										</div>
+										<div class="gap clearfix custom-h5" ></div>
+
+									</li><!-- #comment-## -->
+								</ul>	
+								{/foreach}
+
+
+																
+
+							
+							</div><!-- user comments -->
+                 {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}           
+
+							<div class="clearfix mbs title-left">
+								<div class="clearfix" >
+									<h3 class="col-title" >{$lang['postcomment']}</h3>
+								</div>
+								<div id="respond" class="comment-respond">
+									<form action="#" method="post" id="commentform" class="comment-form">
+									<input type=hidden name="action" value="rad">
+										<div class=" mb"><input class="inputer" id="author" name="writer" value="" type="text" placeholder="{$lang['yourname']} *" required /></div>
+										<textarea class="inputer" id="comment" name="comment" rows="8" placeholder="{$lang['yourmessage']} *" required></textarea>					
+
+{if $sitesettings['setting_comnedaprov'] == 0}
+										<p class="form-allowed-tags"><code>{$lang['commentwillpaaa']}</code></p>					
+{/if}
+
+
+
+								<div class="clearfix" >
+									<h3 class="col-title" >{$lang['entercaptcha']}</h3>
+								</div>
+<div class=" mb">
+<div class="row">
+<div class="col-xs-2">
+<img src='{\mem::get('config')->config['tpl']['baseurl']}captcha.jpg'>
+</div>
+<div class="col-xs-10">
+<input class="inputer" name="captcha" value="" type="text" placeholder="{$lang['entercaptcha']} *" required />
+</div>
+</div>
+</div>
+
+										<p class="form-submit">
+	
+											<input name="submit" type="submit" id="submit" value="{$lang['sendcomment']}" />
+										</p>
+									</form>
+								</div><!-- #respond -->											
+							</div><!-- form -->								
+							
+						</div><!-- comment -->

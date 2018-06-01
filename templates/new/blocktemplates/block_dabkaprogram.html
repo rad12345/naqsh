@@ -1,0 +1,18 @@
+ 
+ 
+   {var $dabkaprogram = \rad\app\model\pages::getupage("dabkaprogram")}                              
+
+
+{if isset($widget['widget_title'])}
+<div class="gap clearfix custom-h50" ></div>
+
+
+						<h2 class="custom-h2"><a href="page/dabkaprogram.html">{$widget['widget_title']}</a></h2>
+						<span class="liner"></span>
+
+{$dabkaprogram['page_content']|noescape}
+
+{/if}                                 
+
+						
+			

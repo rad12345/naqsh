@@ -1,0 +1,75 @@
+{layout 'main.html'}
+
+{block newsmenu}class="active"{/block}
+{block content}
+
+			                <!-- cat Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="cat-header">
+                           <a href="admin/news.html"> الاخبار - الاقسام</a> 
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+                 {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}           
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>اضافة / تعديل قسم</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST">
+                             <input type="hidden" name="action" value="{if isset($editcat)}editcat{else}newcat{/if}">
+                            <div class="form-group">
+                                <label>عنوان القسم</label>
+                                <input name="title" value="{$catinfo['title']}" class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>وصف القسم</label>
+                                <textarea name="desc"  class="form-control">{$catinfo['desc']}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>اللغة</label>
+                                <select name="lang" class="form-control">
+                                {if $catinfo['lang'] === "arabic"}<option  SELECTED   value="arabic">العربية</option>{/if}
+                                {if $catinfo['lang'] === "english"} <option SELECTED  value="english">English</option> {/if}
+                                </select>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}

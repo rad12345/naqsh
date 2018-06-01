@@ -1,0 +1,36 @@
+{var $lastimages = \rad\app\model\images::getlastimages(4)}	
+						<div class="gap clearfix custom-h50" ></div>
+						
+						<h2 class="custom-h2" style="font-size: 24pt; font-family: 'courier new', courier, monospace;"><a href="albums.html"><strong>{$lang['photoportfolio']}</strong></a></h2>
+						
+						<div class="gap clearfix custom-h30" ></div>
+						
+						<div class="col-sm-12">
+							
+							
+								<div class="row">
+								
+								{var $counter = 0}
+								{foreach $lastimages as $lastimage}
+								<div class="col-xs-6">{var $counter = $counter + 1}
+								<div class="tt_align_center">
+									<a href="portfolio.html/image/{$lastimage['image_id']}" ><img width="100%" style="max-height:210px;" src='{\mem::get('config')->config['tpl']['baseurl']}{$lastimage['image_thumb']}'></a>
+								</div> 
+								</div>
+								{if $counter == 2}
+								</div>
+								<div class="gap clearfix custom-h30" ></div>
+								<div class="row">
+								
+								{/if}
+								{/foreach}
+								
+								
+							</div> 
+							
+
+
+					</div> 
+
+						
+			

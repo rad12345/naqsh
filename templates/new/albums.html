@@ -1,0 +1,49 @@
+{layout 'main.html'}
+{block pagetitle}- {$lang['photoportfolio']} {/block}
+{block beforecontentdiv}
+            <div class="breadcrumb-place ">
+                <div class="row clearfix">
+                    <h1 class="page-title">{$lang['photoportfolio']} - {$lang['albums']}</h1>
+                </div><!-- row -->
+            </div><!-- breadcrumb -->
+
+{/block}
+
+
+{block content}
+{var $albums = rad\app\model\images::getalbums()}
+
+<div class="gap clearfix custom-h50" ></div>
+
+
+                <div class="row clearfix mbs">
+					
+                            {var $counter = 0}
+                            <div class="row">
+                            {foreach $albums as $album}
+                            {if $counter == 4}
+                            {var $counter = 0}
+                            </div><div class="row">
+                            {/if}
+                            {var $counter = $counter + 1}
+                    <div class="col-sm-3  " style="margin-bottom:10px;">
+                                <div class="detailes" style="">
+                                    <a href="portfolio.html/{$album['album_id']}"><h3>{if $_SESSION['lang'] == "english"}{$album['album_englishtitle']}{else}{$album['album_arabictitle']}{/if}</h3>
+									                  {if $album['image_thumb'] != ""} <img width="100%" src='{\mem::get('config')->config['tpl']['baseurl']}{$album['image_thumb']}' />  {/if}   </a>                           
+                                   
+                                   <div class="detailes">
+                                   
+								</div>
+                                  </div>			
+                    </div>
+                            
+                            
+                            {/foreach}
+                            </div>
+                              
+
+					
+                              </div><!-- row -->
+
+			
+			{/block}

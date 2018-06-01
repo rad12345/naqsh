@@ -1,0 +1,96 @@
+{block content}
+{var $contentrows = rad\app\model\widgets::lang_getcontentrows()}
+{var $contentswidgets = rad\app\model\widgets::lang_getcontentwigets()}
+{var $subcontentswidgets = rad\app\model\widgets::lang_subgetcontentwigets()}
+{var $sidecontentwidgets = rad\app\model\widgets::getsidewidgets()}
+{var $sidecontentwidgets = (isset($sidecontentwidgets[$_SESSION['lang']]) ? $sidecontentwidgets[$_SESSION['lang']] : array())}
+              {foreach $contentrows as $pagerow}
+              
+                  <div class="row">
+                      
+                       {if isset($contentswidgets[$pagerow['row_id']])}
+                       
+                                              
+                       {var $widgetcols = (count($contentswidgets[$pagerow['row_id']]) > 4 ? 4 : 12 / count($contentswidgets[$pagerow['row_id']]))}
+                          {foreach $contentswidgets[$pagerow['row_id']] as $rowwidget}
+                          
+                              
+                                <div class="col-sm-{$widgetcols}">
+                       {if isset($subcontentswidgets[$rowwidget['widget_id']])}
+                                 <div class="row">
+                                 <div class="col-sm-12">
+                                 {include blocktemplates/block_withbackground.html,widget=>$rowwidget}
+                                 </div>
+                                 </div>
+                                 
+                                 
+                                 {foreach $subcontentswidgets[$rowwidget['widget_id']] as $subwidget}
+                                 <div class="row">
+                                 <div class="col-sm-12">
+                                  {include blocktemplates/block_withbackground.html,widget=>$subwidget}
+                                 </div>
+                                 </div>
+                                 
+                                 {/foreach}
+                                 
+                      
+                       {else}
+                       {var $blockfile = ($rowwidget['widget_blockfile'] != "" && file_exists(\mem::get('config')->config['tpl']['tpl_dir']."blocktemplates/block_".$rowwidget['widget_blockfile'].".html") ? $rowwidget['widget_blockfile'] : "withbackground")}
+                       {include blocktemplates/block_$blockfile.html,widget=>$rowwidget}
+
+
+                         {/if}
+                               </div>
+                            
+                          {/foreach}
+                      {/if}
+                       
+
+ 
+                      
+                  </div>
+                  
+              {/foreach}
+
+
+
+				
+                    
+				
+			
+			{/block}
+			
+{define mainwidgetblock}
+                                 
+
+
+
+<div class="action mbf style3 dark_action clearfix">
+                            <div class="inner">
+                                <div class="matn">
+
+
+						<div>
+						<h3 class="col-title">{$widget['widget_title']}</h3>
+						<span class="liner"></span>
+						
+            <div class="tt_text_column tt_content_element ">
+							{nl2br($widget['widget_shortcontent'])|noescape}
+							
+						<div >
+						<a style="float:{$lang['opj_align']};display:block;" class="tbutton small  color1" href="#" target="_blank" ><span><i class="icon-leaf"></i> {$lang['more']} </span></a>
+						</div>
+            </div>
+						</div> 
+					
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                 
+{/define}		
+
+						
+			

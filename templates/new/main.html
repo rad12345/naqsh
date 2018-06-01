@@ -1,0 +1,556 @@
+{var $menupages = rad\app\model\pages::lang_get()}
+{var $menusubpages = rad\app\model\pages::lang_getsub()}
+
+
+
+
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" lang="{if $_SESSION['lang'] == "arabic"}ar{else}en{/if}">
+	
+    <!-- Basic Page Needs
+ 	================================================== -->
+	<meta charset="UTF-8">
+	
+    <title>{$sitesettings['setting_title']} {block pagetitle}{/block}</title>
+
+    <meta name="description" content="{$sitesettings['setting_desc']}"> 
+    
+    <meta name="robots" content="index, follow">
+
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=EmulateIE8; IE=EDGE" />
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script  type="text/javascript" src="js/excanvas.min.js"></script>
+    <![endif]-->
+
+    <!-- Mobile Specific Metas-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<!-- Favicons -->
+	<link href="images/favicon.ico" rel="shortcut icon"> 
+ 
+	<!-- Google Fonts -->
+
+	<link rel="stylesheet" href="fonts/stylesheet.css" type="text/css" media="screen">
+
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
+	{if $lang['page_dir'] == "rtl"}
+	<link rel="stylesheet" href="css/bootstrap-rtl.css" type="text/css" media="screen">
+  {/if}
+	
+	<!-- Stylesheets -->
+    <link rel="stylesheet" id="stylesheet-css"  href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" id="icons-css"  href="css/icons.css" type="text/css" media="all">
+    <link rel="stylesheet" id="revslider-css"  href="css/settings.css" type="text/css" media="all">
+	<link rel="stylesheet" id="shortcodes_front-css"  href="css/shortcodes.css?ver=4.3.2" type="text/css" media="all"> 
+	
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" id="responsive-css"  href="css/responsive.css" type="text/css" media="all">
+	{if $lang['page_dir'] == "rtl"}
+    <link rel="stylesheet"  href="css/rtl.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="css/breakingNews.css"/>
+{else}
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oswald%3A300%2Cregular%2C700&#038;ver=3.9.2' type='text/css' media='all' />
+<link rel="stylesheet" type="text/css" href="css/breakingNewsen.css"/>
+  {/if}
+
+	<link rel="stylesheet" id="dark-css"  href="css/dark.css" type="text/css" media="all">
+    
+	<!-- Custom CSS -->
+    <link rel="stylesheet" id="custom-css"  href="css/custom-styles.css" type="text/css" media="all">
+	<link rel="stylesheet" href="sidebar2/css/style.css"> <!-- Resource style -->
+<style>
+body {
+background-color :#222;
+	background-image:url('{\mem::get('config')->config['tpl']['baseurl']|noescape}{$sitesettings['setting_background']|noescape}') !important;
+}
+
+
+
+
+</style>
+
+	
+{block headinclude}
+
+{/block}
+
+
+</head>        
+
+
+
+<body class="home page tt_responsive">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="home" >
+			
+		<div id="layout" class="boxed-margin dark" style="position:relative;">    
+		        
+			<header id="header" class="header_v1">
+	
+				<div class="headdown" >
+					
+					<div class="row clearfix" >
+					<div class="navtriger">
+							<a href="#" class="cd-nav-trigger"><span></span></a>
+					</div>
+
+
+
+
+						
+						
+						<div style="padding:5px;margin:7px;float:{$lang['opj_align']};">
+					<a href="index.html/lang/arabic"><font color="white">العربية</font></a>
+					-
+					<a href="index.html/lang/english"><font color="white">English</font></a>
+					
+							
+						</div><!-- search -->
+
+					</div><!-- row -->
+				
+				</div><!-- headdown -->
+
+	<main class="cd-main-content">
+		<nav class="cd-side-nav">
+	<!--
+		<div class="cd-search is-hidden">
+			<form action="#0">
+				<input type="search" placeholder="Search...">
+			</form>
+		</div> 
+	-->	
+			<ul>
+
+<li class="overview">
+<a href="index.html">{$lang['home']}</a>
+              </li>
+ {if isset($menupages)}
+			{foreach $menupages as $page}
+
+
+        {if isset($menusubpages[$page['page_id']])}
+
+                  
+<li class="has-children overview">
+<a href="page/{$page['page_id']}.html">{$page['page_name']} <span class="caret"></span></a>
+					
+					
+                  <ul>
+            {foreach $menusubpages[$page['page_id']] as $spage}
+                <li><a href="page/{$page['page_id']}/{$spage['page_id']}.html">{$spage['page_name']}</a></li>
+            {/foreach}
+                </ul>
+            {else}            
+<li class="overview">
+<a href="page/{$page['page_id']}.html">{$page['page_name']}</a>
+              </li>
+            {/if} 
+
+    {/foreach}
+{/if}
+
+			</ul>
+
+
+		</nav>
+
+	</main> <!-- .cd-main-content -->
+					
+	
+				
+				<div class="head " style="    border-top-width: 0px;">
+					
+					<div class="row clearfix" >
+						
+						<div class="logo" style="max-width:450px; width:100%;margin-top: 10px; margin-bottom: 10px;">
+	{if $lang['page_dir'] == "rtl"}
+<a href=""><img src="images/lo.png" alt="Minimal" /></a>
+ {else}
+<a href=""><img src="images/lo2.png" alt="Minimal" /></a>
+  {/if}
+						</div><!-- end logo -->
+						
+						<div class="social social-head without_border rs" >			
+               <a href='{$sitesettings['setting_youtube']}' target="_blank" class="bottomtip" title="Youtube">						
+                                <i class="icon-youtube"></i>
+							</a >	
+               <a href='{$sitesettings['setting_twitter']}' target="_blank" class="bottomtip" title="Instagram">						
+                                <i class="icon-instagram"></i>
+							</a >	
+							<a href='{$sitesettings['setting_facebook']}' target="_blank"  class="bottomtip" title="Facebook">
+								<i class="icon-facebook"></i>
+							</a >	
+							<a href="contact.html"  class="bottomtip" title="{$lang['contactus']}">
+								<i class="icon-phone"></i>
+							</a >											
+						</div><!-- end social -->  
+
+					</div><!-- row -->
+				
+				</div><!-- head -->
+				
+				<div class="headdown my_sticky hideontablet" >
+					
+					<div class="row clearfix" >
+						
+						<!-- Menu -->
+						<nav class="main">
+							<ul id="menu-main" class="sf-menu">
+       <li class="menu-item {block active_mainpage}{/block}"><a  href="index.html">{$lang['home']} </a></li>
+								
+ {if isset($menupages)}
+			{foreach $menupages as $page}
+
+
+        {if isset($menusubpages[$page['page_id']])}
+
+                  
+              <li class="menu-item {if isset($activepageid) && $activepageid == $page['page_id']}current-menu-item {/if}"><a onclick="return false;" href='#'>{$page['page_name']} <span class="caret"></span></a>
+
+                  <ul class="dropdown-menu">
+            {foreach $menusubpages[$page['page_id']] as $spage}
+                <li><a href="page/{$page['page_id']}/{$spage['page_id']}.html">{$spage['page_name']}</a></li>
+            {/foreach}
+                </ul>
+ </li>
+            {else}            
+              <li class="menu-item {if isset($activepageid) && $activepageid == $page['page_id']}current-menu-item{/if}"><a href="page/{$page['page_id']}.html">{$page['page_name']} </a>
+              </li>
+            {/if} 
+
+    {/foreach}
+{/if} 
+              </li>
+
+
+							</ul>
+						</nav><!-- /Menu -->
+					
+					</div><!-- row -->
+				
+				</div><!-- headdown -->
+				
+				
+			</header><!-- end header -->
+
+
+
+
+
+
+
+
+
+
+
+	
+{block slider}{/block}
+
+
+{block beforecontentdiv}{/block}
+			<div class="page-content">
+				
+{block content}{/block}
+				
+				
+				
+				
+				
+				
+
+  
+			</div><!-- end page-content -->
+        
+        
+           
+
+			
+			
+
+			<footer id="footer">
+				
+				<div class="row clearfix">
+            	
+					<div class="footer_widget widget_text col-sm-3">
+						<a href="page/aboutus.html"><h3 class="col-title">{$lang['aboutus']}</h3></a>
+						<span class="liner"></span>			
+						<div class="textwidget"><p>
+						{nl2br($sitesettings['setting_desc'])|noescape}</p></div>
+					</div>
+					
+					<div class="footer_widget widget_official_embed col-sm-3">
+						<a href="videoportfolio.html"><h3 class="col-title">{$lang['fromlib']}</h3></a>
+						<span class="liner"></span>
+						<div class="embed">
+							 {\rad\app\model\videos::getemped($sitesettings['setting_video'],"100%","auto")|noescape}
+						</div>
+					</div>
+					
+					<div class="footer_widget widget_official_portfolio col-sm-3">
+						<a href="albums.html"><h3 class="col-title">{$lang['lastpics']}</h3></a>
+						<span class="liner"></span>			
+						
+						<div class="recent recent-portfolio">
+							<ul>
+{var $lastimages = \rad\app\model\images::getlastimages(4)}	
+   {foreach $lastimages as $lastimage}
+				                <li>
+				                
+				             
+
+									<div class="post-thumbnail">
+                            
+<a href="portfolio.html/image/{$lastimage['image_id']}" >
+<img width="100%" style="max-height:210px;" src='{\mem::get('config')->config['tpl']['baseurl']}{$lastimage['image_thumb']}'></a>
+
+									</div>
+									
+
+								</li>
+		{/foreach}							
+
+
+                			</ul>
+							
+						</div>
+					
+					</div>
+					
+					<div class="footer_widget widget_text col-sm-3">
+						<a href="page/donate.html"><h3 class="col-title">{$lang['donate']}</h3></a>
+						<span class="liner"></span>			
+						<div class="textwidget">
+						<div width="100%" style="text-align:center;color:#000;background-color:#e1a326;border-radius:5px;margin:10px;padding:10px;">
+						<a class="" href="page/donate.html">
+								<span><b><h1 style="color:#000;">{$lang['donatecenter']}</h1><b></span></a>
+						
+						</div>
+						</div>
+							<div width="100%" style="text-align:center;color:#000;background-color:#fff;border-radius:5px;margin:10px;padding:10px;">
+								<span><h4 style="color:#000;">الداعم الاستراتيجي</h4></span></a>
+						<img src="images/tnblogo.png">
+						</div>					
+						
+					</div>
+					
+				
+				</div><!-- row -->
+
+				<div class="footer-last row mtf clearfix">
+					<span class="copyright">{$lang['rightsreserverd']} © 2016   {$sitesettings['setting_title']}  {$lang['programmedby']} <a href='https://www.facebook.com/nsyaneksab.aked' target="_blank">رعد حازم</a>.</span>
+					
+					<div class="menu-footer-menu-container">
+						
+						<ul class="foot-menu">
+							<li class="menu-item"><a href="page/aboutus.html">{$lang['aboutcenter']}</a></li>
+							<li class="menu-item"><a href="page/ourpartners.html">{$lang['ourpartners']}</a></li>
+							<li class="menu-item"><a href="page/donate.html">{$lang['FDonate']}</a></li>
+							<li class="menu-item"><a href="contact.html">{$lang['contactus']}</a></li>
+						</ul>
+					
+					</div> 
+
+				</div><!-- end last footer -->
+
+			</footer><!-- end footer -->	
+
+		</div><!-- end layout -->
+	</div><!-- end frame -->
+	<div id="toTop"><i class="icon-angle-up"></i></div><!-- Back to top -->
+
+
+
+	<!-- JavaScripts -->
+<script>
+  (function(i,s,o,g,r,a,m){  i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){  
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74339184-1', 'auto');
+  ga('send', 'pageview');
+
+</script>	
+	
+	
+	<script type="text/javascript" src="js/jquery/jquery.js?ver=1.11.0"></script>
+	<script type="text/javascript" src="js/revslider/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="js/revslider/jquery.themepunch.tools.min.js"></script>
+	<script type="text/javascript" src="js/themetor.js?ver=1.0"></script>
+	{if $lang['page_dir'] == "rtl"}
+	<script type="text/javascript" src="js/arcountdown.js?ver=3.9.2"></script>
+<script src="js/breakingNews.js"></script>
+  {else}
+<script src="js/breakingNewsen.js"></script>
+	<script type="text/javascript" src="js/countdown.js?ver=3.9.2"></script>
+  {/if}
+	<script type="text/javascript" src="js/custom.js?ver=1.0"></script>
+
+<script src="sidebar2/js/jquery.menu-aim.js"></script>
+<script src="sidebar2/js/main.js"></script> <!-- Resource jQuery -->
+
+
+<script type="text/javascript">
+
+
+	jQuery(document).ready(function($) {
+		
+		
+		$("#bn7").breakingNews({
+			effect		:"slide-h",
+			autoplay	:true,
+			timer		:3000,
+			color		:'darkred'
+		});
+		
+		
+    });
+
+
+
+
+
+
+
+		/******************************************
+			-	PREPARE PLACEHOLDER FOR SLIDER	-
+		******************************************/
+		
+
+		var setREVStartSize = function() { 
+			var	tpopt = new Object();
+				tpopt.startwidth = 1060;
+				tpopt.startheight = 500;
+				tpopt.container = jQuery('#rev_slider_2_1');
+				tpopt.fullScreen = "off";
+				tpopt.forceFullWidth="off";
+
+			tpopt.container.closest(".rev_slider_wrapper").css({ height:tpopt.container.height()});tpopt.width=parseInt(tpopt.container.width(),0);tpopt.height=parseInt(tpopt.container.height(),0);tpopt.bw=tpopt.width/tpopt.startwidth;tpopt.bh=tpopt.height/tpopt.startheight;if(tpopt.bh>tpopt.bw)tpopt.bh=tpopt.bw;if(tpopt.bh<tpopt.bw)tpopt.bw=tpopt.bh;if(tpopt.bw<tpopt.bh)tpopt.bh=tpopt.bw;if(tpopt.bh>1){ tpopt.bw=1;tpopt.bh=1}if(tpopt.bw>1){ tpopt.bw=1;tpopt.bh=1}tpopt.height=Math.round(tpopt.startheight*(tpopt.width/tpopt.startwidth));if(tpopt.height>tpopt.startheight&&tpopt.autoHeight!="on")tpopt.height=tpopt.startheight;if(tpopt.fullScreen=="on"){ tpopt.height=tpopt.bw*tpopt.startheight;var cow=tpopt.container.parent().width();var coh=jQuery(window).height();if(tpopt.fullScreenOffsetContainer!=undefined){ try{ var offcontainers=tpopt.fullScreenOffsetContainer.split(",");jQuery.each(offcontainers,function(e,t){ coh=coh-jQuery(t).outerHeight(true);if(coh<tpopt.minFullScreenHeight)coh=tpopt.minFullScreenHeight})}catch(e){ }}tpopt.container.parent().height(coh);tpopt.container.height(coh);tpopt.container.closest(".rev_slider_wrapper").height(coh);tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh);tpopt.container.css({ height:"100%"});tpopt.height=coh;}else{ tpopt.container.height(tpopt.height);tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height);tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height);}
+		};
+
+		/* CALL PLACEHOLDER */
+		setREVStartSize();
+
+
+		var tpj=jQuery;
+		tpj.noConflict();
+		var revapi2;
+
+		tpj(document).ready(function() { 
+
+		if(tpj('#rev_slider_2_1').revolution == undefined)
+			revslider_showDoubleJqueryError('#rev_slider_2_1');
+		else
+		   revapi2 = tpj('#rev_slider_2_1').show().revolution(
+			{ 
+				dottedOverlay:"none",
+				delay:5000,
+				startwidth:1060,
+				startheight:500,
+				hideThumbs:200,
+
+				thumbWidth:100,
+				thumbHeight:50,
+				thumbAmount:2,
+
+				navigationType:"bullet",
+				navigationArrows:"solo",
+				navigationStyle:"navbar-old",
+
+				touchenabled:"on",
+				onHoverStop:"on",
+
+				swipe_velocity: 0.7,
+				swipe_min_touches: 1,
+				swipe_max_touches: 1,
+				drag_block_vertical: false,
+				
+				
+				keyboardNavigation:"off",
+
+				navigationHAlign:"center",
+				navigationVAlign:"bottom",
+				navigationHOffset:0,
+				navigationVOffset:20,
+
+				soloArrowLeftHalign:"left",
+				soloArrowLeftValign:"center",
+				soloArrowLeftHOffset:20,
+				soloArrowLeftVOffset:0,
+
+				soloArrowRightHalign:"right",
+				soloArrowRightValign:"center",
+				soloArrowRightHOffset:20,
+				soloArrowRightVOffset:0,
+
+				shadow:0,
+				fullWidth:"on",
+				fullScreen:"off",
+
+				spinner:"spinner3",
+
+				stopLoop:"off",
+				stopAfterLoops:-1,
+				stopAtSlide:-1,
+
+				shuffle:"off",
+
+				autoHeight:"off",
+				forceFullWidth:"off",
+				
+				
+				hideTimerBar:"on",
+				hideThumbsOnMobile:"off",
+				hideNavDelayOnMobile:1500,
+				hideBulletsOnMobile:"off",
+				hideArrowsOnMobile:"off",
+				hideThumbsUnderResolution:0,
+
+										hideSliderAtLimit:0,
+				hideCaptionAtLimit:0,
+				hideAllCaptionAtLilmit:0,
+				startWithSlide:0					});
+
+
+
+			
+		});	/*ready*/
+</script>
+			
+{var $counter = \rad\app\model\counter::getcounter()}<script >
+
+		jQuery(document).ready(function($) { 
+			
+			// Countdown Timer /////////////////////////////
+			try { 
+				$("#cd_tt1").countdown({ 
+				date: "{$counter['counter_day']|noescape} {$counter['counter_month']|noescape} {$counter['counter_year']|noescape} {$counter['counter_hour']|noescape}:00:00",
+				format: "off"
+				});
+			} catch(e){ }
+		});	
+	</script>
+	
+
+
+	
+</body>
+</html>
+
+			
+

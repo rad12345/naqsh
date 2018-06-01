@@ -1,0 +1,25 @@
+{var $aboutuswidget = \rad\app\model\settings::getaboutus()}	
+                                 
+
+<div class="gap clearfix custom-h50" ></div>
+
+						<div class="col-sm-6">
+							
+							<div class="tt_text_column tt_content_element ">
+{if $_SESSION['lang'] == "arabic"}
+{$aboutuswidget['aboutuswidget_artitle']|noescape}
+{else}
+{$aboutuswidget['aboutuswidget_entitle']|noescape}
+{/if}
+							</div> 
+
+						</div> 
+
+						<div class="col-sm-6">
+							<img src='{\mem::get('config')->config['tpl']['baseurl']}{$aboutuswidget['aboutuswidget_image']}' alt="about">
+						</div> 
+
+                                 
+
+						
+			

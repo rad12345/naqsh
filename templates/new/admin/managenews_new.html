@@ -1,0 +1,112 @@
+{layout 'main.html'}
+
+{block newsmenu}class="active"{/block}
+
+
+{block footinclude}
+
+	<script src="admin/ckeditor/ckeditor.js"></script>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'edit1' );
+                CKEDITOR.replace( 'edit2' );
+            </script>
+
+{/block}
+
+
+{block content}
+{var $cats = \rad\app\model\news::admin_lang_cats()}
+
+
+
+			                <!-- subhect Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="subhect-header">
+                           <a href="admin/managenews.html">ادارة الاخبار</a> 
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                
+                 {if isset($successmessage)}
+                <div class="alert alert-success">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong> <br>
+                  {/foreach}
+                </div>
+                {/if}
+                {if isset($alertmessage)}
+                <div class="alert alert-danger">
+                	{foreach $messages as $message}
+                    <strong>{$message}</strong>  <br>
+                  {/foreach}
+                </div>    
+                {/if}           
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>اضافة / تعديل خبر</h3>
+                            </div>
+                            <div class="panel-body">
+                            
+                            
+                        <form role="form" method="POST"  enctype="multipart/form-data">
+                             <input type="hidden" name="action" value="{if isset($editsubhect)}editsubhect{else}newsubhect{/if}">
+                            <div class="form-group">
+                                <label>عنوان الخبر</label>
+                                <input name="title" value="{$subjectinfo['title']}" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>القسم</label>
+                                
+                                <select name="cat" class="form-control">
+                                {if isset($cats['arabic'])}
+                                {foreach $cats['arabic'] as $cat}
+                                <option  {if $subjectinfo['cat'] == $cat['cat_id']}selected{/if}   value="{$cat['cat_id']}">{$cat['cat_title']}</option>
+                                {/foreach}
+                                {/if}
+                                {if isset($cats['english'])}
+                                {foreach $cats['english'] as $cat}
+                                <option  {if $subjectinfo['cat'] == $cat['cat_id']}selected{/if}   value="{$cat['cat_id']}">{$cat['cat_title']}</option>
+                                {/foreach}
+                                {/if}
+                                </select>
+                            </div>
+                            {if !isset($updatesubject)}
+                            <div  class="form-group">
+                                <label> اختيار الصورة</label>
+                               <input type="file" name="image">
+                            </div>
+                            {/if}
+
+                            <div class="form-group">
+                                <label>الوصف القصير </label>
+                                <textarea id="edit1" name="desc"  class="form-control">{$subjectinfo['desc']}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>الخبر كامل </label>
+                                <textarea id="edit2" name="content" rows="10" class="form-control">{$subjectinfo['content']}</textarea>
+                            </div>
+
+
+
+                            <button type="submit" class="btn btn-default">حفظ</button>
+
+                        </form>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    
+                    
+                </div>
+                <!-- /.row -->
+
+{/block}
